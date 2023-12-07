@@ -1,2 +1,3 @@
-# GameServerBrowser
-A simple Blazor powered game server browser
+Universal Steam Server Browser WebApp
+
+Primarily used for Source & GoldSrc games/mods!
