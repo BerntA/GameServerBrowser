@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Net;
 
 namespace GameServerList.Services;
 
@@ -10,27 +11,32 @@ public class SteamServerBrowserApiService
     private readonly HttpClient _httpClient;
     private readonly IMemoryCache _cache;
     private readonly string _apiKey;
-    private readonly JsonSerializerSettings _jsonSerializerSettings;
     private readonly int _querySize;
+    private readonly JsonSerializerSettings _jsonSerializerSettings;
 
     public SteamServerBrowserApiService(IConfiguration config, IMemoryCache memoryCache)
     {
-        _httpClient = new HttpClient();
+        var httpClientHandler = new HttpClientHandler();
+        httpClientHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+        _httpClient = new HttpClient(httpClientHandler);
         _httpClient.BaseAddress = new Uri(config["SteamAPIUrl"]);
+
         _cache = memoryCache;
         _apiKey = config["SteamAPIKey"];
+        _querySize = int.TryParse(config["QuerySize"], out var size) ? size : 1000;
+
         _jsonSerializerSettings = new JsonSerializerSettings
         {
             ContractResolver = new CamelCasePropertyNamesContractResolver(),
             NullValueHandling = NullValueHandling.Ignore,
         };
-        _querySize = int.TryParse(config["QuerySize"], out var size) ? size : 1000;
     }
 
     public async Task<List<GameServerItem>> FetchServers(Game? game)
     {
         if (game is null)
-            return new List<GameServerItem>();
+            return [];
 
         var key = $"{game.AppId}{(string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"-{game.GameDir}")}";
 
@@ -66,7 +72,7 @@ public class SteamServerBrowserApiService
         }
         catch
         {
-            return new List<T>();
+            return [];
         }
     }
 }
