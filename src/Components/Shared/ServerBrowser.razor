@@ -1,0 +1,63 @@
+﻿<MudGrid class="mt-1">
+    <MudItem xs="1">
+    </MudItem>
+    <MudItem xs="10">
+        <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" ValueChanged=@SelectedGame>
+            @foreach (var item in GameList.Games.Select((g, i) => new { game = g, index = i }))
+            {
+                <MudSelectItem Value="@(item.index)">
+                    <img src="@($"{item.game.Icon}.jpg")" width="16" class="mr-1" />
+                    @(item.game.Name)
+                </MudSelectItem>
+            }
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="1">
+    </MudItem>
+</MudGrid>
+
+<MudGrid class="mt-3">
+    <MudItem xs="1">
+    </MudItem>
+    <MudItem xs="10">
+        <MudTable Items="@_servers" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" Height="800px">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Players</MudTh>
+                <MudTh>Max Players</MudTh>
+                <MudTh>Map</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Players">@context.CurrentPlayers</MudTd>
+                <MudTd DataLabel="Max Players">@context.MaxPlayers</MudTd>
+                <MudTd DataLabel="Map">@context.Map</MudTd>
+                <MudTd>
+                    <MudLink Href="@($"steam://connect/{context.Address}:{context.Port}")">
+                        <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Title="Connect"/>
+                    </MudLink>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudItem>
+    <MudItem xs="1">
+    </MudItem>
+</MudGrid>
+
+@code {
+    private bool _loading;
+    private List<GameServerItem> _servers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await SelectedGame(0);
+    }
+
+    protected async Task SelectedGame(int value)
+    {
+        _loading = true;
+        _servers = await _serverBrowserService.FetchServers(GameList.GetGameByIndex(value));
+        _loading = false;
+    }
+}

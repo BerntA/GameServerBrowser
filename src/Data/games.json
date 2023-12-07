@@ -1,0 +1,151 @@
+{
+  "GameList": [
+    {
+      "name": "Half-Life",
+      "icon": "img/icons/hl",
+      "appId": 70
+    },
+    {
+      "name": "Master Sword: Rebirth",
+      "icon": "img/icons/msr",
+      "appId": 1961680
+    },
+    {
+      "name": "Master Sword: Continued",
+      "icon": "img/icons/msr",
+      "gamedir": "msc",
+      "appId": 70
+    },
+    {
+      "name": "Cry of Fear",
+      "icon": "img/icons/cof",
+      "appId": 223710
+    },
+    {
+      "name": "Cry of Fear (MOD)",
+      "icon": "img/icons/cof",
+      "gamedir": "cof",
+      "appId": 70
+    },
+    {
+      "name": "Resident Evil: Cold Blood",
+      "icon": "img/icons/recb",
+      "gamedir": "recb",
+      "appId": 70
+    },
+    {
+      "name": "BrainBread",
+      "icon": "img/icons/hl",
+      "gamedir": "brainbread",
+      "appId": 70
+    },
+    {
+      "name": "Battle Grounds",
+      "icon": "img/icons/hl",
+      "gamedir": "bg",
+      "appId": 70
+    },
+    {
+      "name": "Firearms",
+      "icon": "img/icons/hl",
+      "gamedir": "firearms",
+      "appId": 70
+    },
+    {
+      "name": "The Specialists",
+      "icon": "img/icons/hl",
+      "gamedir": "ts",
+      "appId": 70
+    },
+    {
+      "name": "Vampire Slayer",
+      "icon": "img/icons/hl",
+      "gamedir": "vs",
+      "appId": 70
+    },
+    {
+      "name": "Zombie Panic!",
+      "icon": "img/icons/hl",
+      "gamedir": "zp",
+      "appId": 70
+    },
+    {
+      "name": "Sven Co-Op",
+      "icon": "img/icons/sven",
+      "appId": 225840
+    },
+    {
+      "name": "Sven Co-Op (CLASSIC)",
+      "icon": "img/icons/sven",
+      "gamedir": "svencoop",
+      "appId": 70
+    },
+    {
+      "name": "Treason",
+      "icon": "img/icons/treason",
+      "appId": 1786950
+    },
+    {
+      "name": "Synergy",
+      "icon": "img/icons/synergy",
+      "appId": 17520
+    },
+    {
+      "name": "Insurgency: Modern Infantry Combat",
+      "icon": "img/icons/ins",
+      "appId": 17700
+    },
+    {
+      "name": "Infestus",
+      "icon": "img/icons/infestus",
+      "appId": 656800
+    },
+    {
+      "name": "BrainBread 2",
+      "icon": "img/icons/bb2",
+      "appId": 346330
+    },
+    {
+      "name": "Battle Grounds III",
+      "icon": "img/icons/bg3",
+      "appId": 1057700
+    },
+    {
+      "name": "Age of Chivalry",
+      "icon": "img/icons/aoc",
+      "appId": 17510
+    },
+    {
+      "name": "Action: Source",
+      "icon": "img/icons/actionhls",
+      "appId": 977050
+    },
+    {
+      "name": "Black Mesa",
+      "icon": "img/icons/bms",
+      "appId": 362890
+    },
+    {
+      "name": "Counter-Strike: Source",
+      "icon": "img/icons/css",
+      "appId": 240
+    },
+    {
+      "name": "Garry's Mod",
+      "icon": "img/icons/gmod",
+      "appId": 4000
+    },
+    {
+      "name": "Golden Eye: Source",
+      "icon": "img/icons/ges",
+      "gamedir": "gesource",
+      "appId": 218
+    },
+    {
+      "name": "Firearms: Source",
+      "icon": "img/icons/fas",
+      "gamedir": "fas",
+      "appId": 218
+    }
+  ]
+}
