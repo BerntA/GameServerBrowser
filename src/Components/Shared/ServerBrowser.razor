@@ -20,7 +20,24 @@
     <MudItem xs="1">
     </MudItem>
     <MudItem xs="10">
-        <MudTable Items="@_servers" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" Height="800px">
+        <MudTable Items="@GetServers()" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" Height="800px">
+            <ToolBarContent>        
+                <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
+                <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
+                <MudCheckBox @bind-Checked="@_hideEmptyServers">Has users playing</MudCheckBox>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(_activeGame); }">
+                    @if(_loading)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                    }
+                    else
+                    {
+                        <MudIcon Icon="@Icons.Material.Filled.Refresh" />
+                    }                    
+                </MudButton>
+            </ToolBarContent>
             <HeaderContent>
                 <MudTh>Name</MudTh>
                 <MudTh>Players</MudTh>
@@ -47,6 +64,11 @@
 
 @code {
     private bool _loading;
+    private bool _hideFullServers;
+    private bool _hideEmptyServers;
+    private string _searchString;
+    private int _serversFound;
+    private int _activeGame;
     private List<GameServerItem> _servers;
 
     protected override async Task OnInitializedAsync()
@@ -56,8 +78,29 @@
 
     protected async Task SelectedGame(int value)
     {
+        _activeGame = value;
         _loading = true;
         _servers = await _serverBrowserService.FetchServers(GameList.GetGameByIndex(value));
         _loading = false;
+    }
+
+    protected List<GameServerItem> GetServers()
+    {
+        if (_servers is null)
+        {
+            _serversFound = 0;
+            return new List<GameServerItem>();
+        }
+
+        var items = _servers
+            .Where(
+                s => (!_hideFullServers || (s.CurrentPlayers < s.MaxPlayers)) &&
+                (!_hideEmptyServers || s.CurrentPlayers > 0) &&
+                (string.IsNullOrEmpty(_searchString) || string.IsNullOrEmpty(s.Map) || s.Map.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+            )
+            .ToList();
+        _serversFound = items.Count;
+
+        return items;
     }
 }

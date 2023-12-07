@@ -52,18 +52,21 @@ public class SteamServerBrowserApiService
 
     private async Task<List<T>> Fetch<T>(string url)
     {
-        using var request = await _httpClient.GetAsync(url);
+        try
+        {
+            using var request = await _httpClient.GetAsync(url);
 
-        if (!request.IsSuccessStatusCode)
+            request.EnsureSuccessStatusCode();
+            var response = await request.Content.ReadAsStringAsync();
+
+            var result = JsonConvert.DeserializeObject<dynamic>(response)!;
+            var data = JsonConvert.DeserializeObject<List<T>>(result.response.servers.ToString(), _jsonSerializerSettings)!;
+
+            return data;
+        }
+        catch
+        {
             return new List<T>();
-
-        var response = await request.Content.ReadAsStringAsync();
-        if (string.IsNullOrEmpty(response))
-            return new List<T>();
-
-        var result = JsonConvert.DeserializeObject<dynamic>(response)!;
-        var data = JsonConvert.DeserializeObject<List<T>>(result.response.servers.ToString(), _jsonSerializerSettings)!;
-
-        return data;
+        }
     }
 }
