@@ -128,12 +128,6 @@
       "appId": 362890
     },
     {
-      "name": "Counter-Strike: Source",
-      "icon": "img/icons/css",
-      "gamedir": "cstrike",
-      "appId": 240
-    },
-    {
       "name": "Garry's Mod",
       "icon": "img/icons/gmod",
       "gamedir": "garrysmod",
