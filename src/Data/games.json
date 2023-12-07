@@ -3,6 +3,7 @@
     {
       "name": "Half-Life",
       "icon": "img/icons/hl",
+      "gamedir": "valve",
       "appId": 70
     },
     {
@@ -88,6 +89,7 @@
     {
       "name": "Synergy",
       "icon": "img/icons/synergy",
+      "gamedir": "synergy",
       "appId": 17520
     },
     {
@@ -128,11 +130,13 @@
     {
       "name": "Counter-Strike: Source",
       "icon": "img/icons/css",
+      "gamedir": "cstrike",
       "appId": 240
     },
     {
       "name": "Garry's Mod",
       "icon": "img/icons/gmod",
+      "gamedir": "garrysmod",
       "appId": 4000
     },
     {
