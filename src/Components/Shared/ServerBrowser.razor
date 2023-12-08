@@ -1,66 +1,52 @@
-﻿<MudGrid class="mt-1">
-    <MudItem xs="1">
-    </MudItem>
-    <MudItem xs="10">
-        <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" ValueChanged=@SelectedGame>
-            @foreach (var item in GameList.Games.Select((g, i) => new { game = g, index = i }))
-            {
-                <MudSelectItem Value="@(item.index)">
-                    <img src="@($"{item.game.Icon}.jpg")" width="16" class="mr-1" />
-                    @(item.game.Name)
-                </MudSelectItem>
-            }
-        </MudSelect>
-    </MudItem>
-    <MudItem xs="1">
-    </MudItem>
-</MudGrid>
+﻿<MudContainer Class="mt-3">
+    <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" ValueChanged=@SelectedGame>
+    @foreach (var item in GameList.Games.Select((g, i) => new { game = g, index = i }))
+    {
+        <MudSelectItem Value="@(item.index)">
+            <img src="@($"{item.game.Icon}.jpg")" width="16" class="mr-1" />
+            @(item.game.Name)
+        </MudSelectItem>
+    }
+    </MudSelect>
 
-<MudGrid class="mt-3">
-    <MudItem xs="1">
-    </MudItem>
-    <MudItem xs="10">
-        <MudTable Items="@GetServers()" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" Height="800px">
-            <ToolBarContent>        
-                <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
-                <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
-                <MudCheckBox @bind-Checked="@_hideEmptyServers">Has users playing</MudCheckBox>
-                <MudSpacer />
-                <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-                <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(_activeGame); }">
-                    @if(_loading)
-                    {
-                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                    }
-                    else
-                    {
-                        <MudIcon Icon="@Icons.Material.Filled.Refresh" />
-                    }                    
-                </MudButton>
-            </ToolBarContent>
-            <HeaderContent>
-                <MudTh>Name</MudTh>
-                <MudTh>Players</MudTh>
-                <MudTh>Max Players</MudTh>
-                <MudTh>Map</MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTd DataLabel="Players">@context.CurrentPlayers</MudTd>
-                <MudTd DataLabel="Max Players">@context.MaxPlayers</MudTd>
-                <MudTd DataLabel="Map">@context.Map</MudTd>
-                <MudTd>
-                    <MudLink Href="@($"steam://connect/{context.Address}:{context.Port}")">
-                        <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Title="Connect"/>
-                    </MudLink>
-                </MudTd>
-            </RowTemplate>
-        </MudTable>
-    </MudItem>
-    <MudItem xs="1">
-    </MudItem>
-</MudGrid>
+    <MudTable Class="mt-3" Items="@GetServers()" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" Height="75vh">
+        <ToolBarContent>        
+            <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
+            <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
+            <MudCheckBox @bind-Checked="@_hideEmptyServers">Has users playing</MudCheckBox>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(_activeGame); }">
+            @if(_loading)
+            {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+            }
+            else
+            {
+                <MudIcon Icon="@Icons.Material.Filled.Refresh" />
+            }                    
+            </MudButton>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Players</MudTh>
+            <MudTh>Max Players</MudTh>
+            <MudTh>Map</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Players">@context.CurrentPlayers</MudTd>
+            <MudTd DataLabel="Max Players">@context.MaxPlayers</MudTd>
+            <MudTd DataLabel="Map">@context.Map</MudTd>
+            <MudTd>
+                <MudLink Href="@($"steam://connect/{context.Address}:{context.Port}")">
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Title="Connect"/>
+                </MudLink>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudContainer>
 
 @code {
     private bool _loading;
