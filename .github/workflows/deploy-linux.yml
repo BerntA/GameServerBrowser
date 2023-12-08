@@ -1,0 +1,31 @@
+name: Deploy on Linux
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+
+    - name: Install Dependencies
+      run: dotnet restore ./app.sln
+
+    - name: Build
+      run: dotnet build --configuration Release ./app.sln
+
+    - name: Publish
+      run: dotnet publish ./src/GameServerList.csproj -c Release -o ./serverbrowser
+
+    - name: Upload Executable
+      uses: actions/upload-artifact@v2
+      with:
+        name: WebApp
+        path: serverbrowser/*
