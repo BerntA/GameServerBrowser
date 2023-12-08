@@ -25,7 +25,7 @@ jobs:
       run: dotnet publish ./src/GameServerList.csproj -c Release -o ./serverbrowser
 
     - name: Upload Executable
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: WebApp
         path: serverbrowser/*
