@@ -50,9 +50,7 @@ public class SteamServerBrowserApiService
                 $"IGameServersService/GetServerList/v1/?key={_apiKey}&limit={_querySize}&filter=appid\\{game.AppId}{gamedirFilter}"
             );
 
-            return servers
-                .OrderByDescending(s => s.CurrentPlayers)
-                .ToList();
+            return servers;
         });
     }
 
