@@ -1,4 +1,4 @@
-﻿using GameServerList.Model;
+﻿using GameServerList.Common.Model;
 using Newtonsoft.Json;
 
 namespace GameServerList.Helpers;

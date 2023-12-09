@@ -1,6 +1,6 @@
+using GameServerList.Common.Services;
 using GameServerList.Components;
 using GameServerList.Helpers;
-using GameServerList.Services;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);

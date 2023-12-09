@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\img\icons\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GameServerList.Common\GameServerList.Common.csproj" />
+  </ItemGroup>
+
 </Project>

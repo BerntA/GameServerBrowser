@@ -1,4 +1,4 @@
-﻿namespace GameServerList.Model;
+﻿namespace GameServerList.Common.Model;
 
 public class Game
 {

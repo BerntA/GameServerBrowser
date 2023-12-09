@@ -22,7 +22,7 @@ jobs:
       run: dotnet build --configuration Release ./app.sln
 
     - name: Publish
-      run: dotnet publish ./src/GameServerList.csproj -c Release -o ./serverbrowser
+      run: dotnet publish ./GameServerList.App/GameServerList.csproj -c Release -o ./serverbrowser
 
     - name: Upload Executable
       uses: actions/upload-artifact@v3

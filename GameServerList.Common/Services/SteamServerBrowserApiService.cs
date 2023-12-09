@@ -1,10 +1,11 @@
-﻿using GameServerList.Model;
+﻿using GameServerList.Common.Model;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net;
 
-namespace GameServerList.Services;
+namespace GameServerList.Common.Services;
 
 public class SteamServerBrowserApiService
 {
