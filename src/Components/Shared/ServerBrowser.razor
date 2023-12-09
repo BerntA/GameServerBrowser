@@ -10,22 +10,27 @@
     </MudSelect>
 
     <MudTable Class="mt-3" Items="@GetServers()" Hover="true" Virtualize="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Xs" Loading="@_loading" LoadingProgressColor="Color.Info" SortLabel="Sort By" Height="75vh">
-        <ToolBarContent>        
-            <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
-            <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
-            <MudCheckBox @bind-Checked="@_hideEmptyServers">Has users playing</MudCheckBox>
-            <MudSpacer />
-            <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-            <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(_activeGame); }">
-            @if(_loading)
-            {
-                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-            }
-            else
-            {
-                <MudIcon Icon="@Icons.Material.Filled.Refresh" />
-            }                    
-            </MudButton>
+        <ToolBarContent>       
+            <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
+                <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
+                <MudCheckBox @bind-Checked="@_hideEmptyServers">Has users playing</MudCheckBox>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(_activeGame); }">
+                @if(_loading)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                }
+                else
+                {
+                    <MudIcon Icon="@Icons.Material.Filled.Refresh" />
+                }                    
+                </MudButton>
+            </MudHidden>
+            <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small" Class="mt-0"></MudTextField>
+            </MudHidden>
         </ToolBarContent>
         <HeaderContent>
             <MudTh><MudTableSortLabel SortBy="new Func<GameServerItem, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
