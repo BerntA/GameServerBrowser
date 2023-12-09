@@ -366,4 +366,4 @@ hg
 !.vscode/extensions.json
 
 # Development Files
-src/appsettings.Development.json
+*/appsettings.Development.json
