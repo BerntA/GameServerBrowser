@@ -24,4 +24,21 @@ public class GameServerItem
 
     [JsonProperty("map")]
     public string? Map { get; set; }
+
+    #region ServerInfo
+    [JsonProperty("os")]
+    public string? OperatingSystem { get; set; }
+
+    [JsonProperty("version")]
+    public string? Version { get; set; }
+
+    [JsonProperty("secure")]
+    public bool? IsVACEnabled { get; set; }
+
+    [JsonProperty("dedicated")]
+    public bool? IsDedicatedServer { get; set; }
+
+    [JsonProperty("bots")]
+    public int? Bots { get; set; }
+    #endregion
 }

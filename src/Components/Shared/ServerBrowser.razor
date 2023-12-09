@@ -1,4 +1,4 @@
-﻿<MudContainer Class="mt-3">
+﻿<MudContainer Class="mt-3" MaxWidth="MaxWidth.ExtraExtraLarge">
     <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" ValueChanged=@SelectedGame>
     @foreach (var item in GameList.Games.Select((g, i) => new { game = g, index = i }))
     {
@@ -9,7 +9,7 @@
     }
     </MudSelect>
 
-    <MudTable Class="mt-3" Items="@GetServers()" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" Height="75vh">
+    <MudTable Class="mt-3" Items="@GetServers()" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Xs" Loading="@_loading" LoadingProgressColor="Color.Info" Height="75vh">
         <ToolBarContent>        
             <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
             <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
@@ -30,19 +30,31 @@
         <HeaderContent>
             <MudTh>Name</MudTh>
             <MudTh>Players</MudTh>
-            <MudTh>Max Players</MudTh>
             <MudTh>Map</MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Name">@context.Name</MudTd>
-            <MudTd DataLabel="Players">@context.CurrentPlayers</MudTd>
-            <MudTd DataLabel="Max Players">@context.MaxPlayers</MudTd>
+            <MudTd DataLabel="Players">@(context.CurrentPlayers)/@(context.MaxPlayers)</MudTd>
             <MudTd DataLabel="Map">@context.Map</MudTd>
             <MudTd>
-                <MudLink Href="@($"steam://connect/{context.Address}:{context.Port}")">
-                    <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Title="Connect"/>
-                </MudLink>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudTooltip>
+                        <ChildContent>
+                                <MudIcon Icon="@Icons.Material.Outlined.Info" Color="Color.Warning" Size="Size.Small" Class="mr-1" />
+                        </ChildContent>
+                        <TooltipContent>
+                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>OS</strong>: @(context.OperatingSystem == "w" ? "Windows" : "Linux")</MudText>
+                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>Version</strong>: @context.Version</MudText>
+                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>VAC</strong>: @((context.IsVACEnabled ?? false) ? "Yes" : "No")</MudText>
+                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>Dedicated Server</strong>: @((context.IsDedicatedServer ?? false) ? "Yes" : "No")</MudText>
+                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>Bots</strong>: @context.Bots</MudText>
+                        </TooltipContent>                            
+                    </MudTooltip>
+                    <MudLink Href="@($"steam://connect/{context.Address}")">
+                        <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Title="Connect" Size="Size.Small" />
+                    </MudLink>
+                </MudHidden>
             </MudTd>
         </RowTemplate>
     </MudTable>
