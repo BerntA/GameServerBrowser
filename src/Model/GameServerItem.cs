@@ -10,9 +10,6 @@ public class GameServerItem
     [JsonProperty("addr")]
     public string? Address { get; set; }
 
-    [JsonProperty("gameport")]
-    public int? Port { get; set; }
-
     [JsonProperty("appid")]
     public long? AppId { get; set; }
 
