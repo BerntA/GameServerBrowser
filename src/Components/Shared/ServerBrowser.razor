@@ -9,7 +9,7 @@
     }
     </MudSelect>
 
-    <MudTable Class="mt-3" Items="@GetServers()" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Xs" Loading="@_loading" LoadingProgressColor="Color.Info" SortLabel="Sort By" Height="75vh">
+    <MudTable Class="mt-3" Items="@GetServers()" Hover="true" Virtualize="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Xs" Loading="@_loading" LoadingProgressColor="Color.Info" SortLabel="Sort By" Height="75vh">
         <ToolBarContent>        
             <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
             <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
