@@ -24,5 +24,6 @@ public static class GameList
 
         var data = JsonConvert.DeserializeObject<dynamic>(text);
         Games = JsonConvert.DeserializeObject<List<Game>>(data.GameList.ToString());
+        Games = Games.OrderBy(g => g.Name).ToList();
     }
 }
