@@ -36,7 +36,7 @@
     },
     {
       "name": "BrainBread",
-      "icon": "img/icons/hl",
+      "icon": "img/icons/bb",
       "gamedir": "brainbread",
       "appId": 70
     },
@@ -98,6 +98,12 @@
       "appId": 17700
     },
     {
+      "name": "Insurgency: Modern Infantry Combat (MOD)",
+      "icon": "img/icons/ins",
+      "gamedir": "insurgency",
+      "appId": 215
+    },
+    {
       "name": "Infestus",
       "icon": "img/icons/infestus",
       "appId": 656800
@@ -118,7 +124,7 @@
       "appId": 17510
     },
     {
-      "name": "Action: Source",
+      "name": "Action Half-Life: Source",
       "icon": "img/icons/actionhls",
       "appId": 977050
     },
@@ -143,6 +149,273 @@
       "name": "Firearms: Source",
       "icon": "img/icons/fas",
       "gamedir": "fas",
+      "appId": 218
+    },
+    {
+      "name": "Zombie Master: Reborn",
+      "icon": "img/icons/zmr",
+      "gamedir": "zombie_master_reborn",
+      "appId": 243750
+    },
+    {
+      "name": "Codename CURE",
+      "icon": "img/icons/cure",
+      "appId": 355180
+    },
+    {
+      "name": "Contagion",
+      "icon": "img/icons/contagion",
+      "appId": 238430
+    },
+    {
+      "name": "Dark Messiah of Might & Magic",
+      "icon": "img/icons/messiah",
+      "appId": 2130
+    },
+    {
+      "name": "Double Action: Boogaloo",
+      "icon": "img/icons/dab",
+      "appId": 317360
+    },
+    {
+      "name": "Dystopia",
+      "icon": "img/icons/dys",
+      "appId": 17580
+    },
+    {
+      "name": "Eternal Silence",
+      "icon": "img/icons/es",
+      "appId": 17550
+    },
+    {
+      "name": "Fistful of Frags",
+      "icon": "img/icons/fof",
+      "appId": 265630
+    },
+    {
+      "name": "Fortress Forever",
+      "icon": "img/icons/ff",
+      "appId": 253530
+    },
+    {
+      "name": "Jabroni Brawl: Episode 3",
+      "icon": "img/icons/jb3",
+      "appId": 869480
+    },
+    {
+      "name": "JBMod",
+      "icon": "img/icons/jbmod",
+      "appId": 2158860
+    },
+    {
+      "name": "Lambda Wars",
+      "icon": "img/icons/lambdawars",
+      "appId": 270370
+    },
+    {
+      "name": "Military Conflict: Vietnam",
+      "icon": "img/icons/mcv",
+      "appId": 1012110
+    },
+    {
+      "name": "Modular Combat",
+      "icon": "img/icons/modcombat",
+      "appId": 349480
+    },
+    {
+      "name": "NEOTOKYO",
+      "icon": "img/icons/neotokyo",
+      "appId": 244630
+    },
+    {
+      "name": "No More Room in Hell",
+      "icon": "img/icons/nmrih",
+      "appId": 224260
+    },
+    {
+      "name": "Nuclear Dawn",
+      "icon": "img/icons/nucleardawn",
+      "appId": 17710
+    },
+    {
+      "name": "Obsidian Conflict",
+      "icon": "img/icons/oc",
+      "appId": 17750
+    },
+    {
+      "name": "Pirates, Vikings, and Knights II",
+      "icon": "img/icons/pvkii",
+      "appId": 17570
+    },
+    {
+      "name": "Smashball",
+      "icon": "img/icons/smashball",
+      "appId": 17730
+    },
+    {
+      "name": "Zombie Panic! Source",
+      "icon": "img/icons/zps",
+      "appId": 17500
+    },
+    {
+      "name": "Obsidian Conflict (MOD)",
+      "icon": "img/icons/oc",
+      "gamedir": "obsidian",
+      "appId": 218
+    },
+    {
+      "name": "Base Defense",
+      "icon": "img/icons/bd",
+      "appId": 632730
+    },
+    {
+      "name": "Deathmatch Classic",
+      "icon": "img/icons/dmclassic",
+      "gamedir": "dmc",
+      "appId": 40
+    },
+    {
+      "name": "Half-Life: Opposing Force",
+      "icon": "img/icons/opfor",
+      "gamedir": "gearbox",
+      "appId": 50
+    },
+    {
+      "name": "Ricochet",
+      "icon": "img/icons/ricochet",
+      "gamedir": "ricochet",
+      "appId": 60
+    },
+    {
+      "name": "Team Fortress Classic",
+      "icon": "img/icons/tfc",
+      "gamedir": "tfc",
+      "appId": 20
+    },
+    {
+      "name": "Day of Defeat",
+      "icon": "img/icons/dod",
+      "gamedir": "dod",
+      "appId": 30
+    },
+    {
+      "name": "Wanted!",
+      "icon": "img/icons/wanted",
+      "gamedir": "wantedsp",
+      "appId": 70
+    },
+    {
+      "name": "Hidden: Source",
+      "icon": "img/icons/hidden",
+      "gamedir": "hidden",
+      "appId": 215
+    },
+    {
+      "name": "Battle Grounds II",
+      "icon": "img/icons/bg2",
+      "gamedir": "bg2",
+      "appId": 218
+    },
+    {
+      "name": "Public Enemy",
+      "icon": "img/icons/penemy",
+      "gamedir": "penemy",
+      "appId": 70
+    },
+    {
+      "name": "Underworld: Bloodline",
+      "icon": "img/icons/underworld",
+      "gamedir": "underworld",
+      "appId": 70
+    },
+    {
+      "name": "Hostile Intent",
+      "icon": "img/icons/hostileintent",
+      "gamedir": "hostileintent",
+      "appId": 70
+    },
+    {
+      "name": "Zombie Master (CLASSIC)",
+      "icon": "img/icons/zmaster",
+      "gamedir": "zombie_master",
+      "appId": 215
+    },
+    {
+      "name": "Situation Outbreak 2",
+      "icon": "img/icons/so",
+      "gamedir": "so2",
+      "appId": 218
+    },
+    {
+      "name": "Situation Outbreak",
+      "icon": "img/icons/so",
+      "gamedir": "so",
+      "appId": 218
+    },
+    {
+      "name": "Resistance and Liberation",
+      "icon": "img/icons/rnl",
+      "gamedir": "RnLBeta",
+      "appId": 218
+    },
+    {
+      "name": "Open Fortress",
+      "icon": "img/icons/tf2",
+      "gamedir": "open_fortress",
+      "appId": 243750
+    },
+    {
+      "name": "TF2 Classic",
+      "icon": "img/icons/tf2",
+      "gamedir": "tf2classic",
+      "appId": 243750
+    },
+    {
+      "name": "OccupationCS",
+      "icon": "img/icons/occupationcs",
+      "gamedir": "OccupationCS",
+      "appId": 218
+    },
+    {
+      "name": "Pirates, Vikings and Knights",
+      "icon": "img/icons/pvk",
+      "gamedir": "pvk",
+      "appId": 70
+    },
+    {
+      "name": "Kingdoms Collide",
+      "icon": "img/icons/kc",
+      "gamedir": "KingdomsCollide",
+      "appId": 218
+    },
+    {
+      "name": "Jailbreak",
+      "icon": "img/icons/jailbreak",
+      "gamedir": "jailbreak",
+      "appId": 70
+    },
+    {
+      "name": "BuzzyBots",
+      "icon": "img/icons/buzzybots",
+      "gamedir": "buzzybots",
+      "appId": 70
+    },
+    {
+      "name": "SMOD Troopers",
+      "icon": "img/icons/hl2",
+      "gamedir": "SmodTroopers",
+      "appId": 215
+    },
+    {
+      "name": "Action Half-Life",
+      "icon": "img/icons/hl",
+      "gamedir": "action",
+      "appId": 70
+    },
+    {
+      "name": "Orion: Source",
+      "icon": "img/icons/hl2",
+      "gamedir": "orion",
       "appId": 218
     }
   ]
