@@ -26,10 +26,14 @@ public static class A2SQuery
                 buffer = await GetData(udpClient, endPoint, buffer, cancellationToken.Token);
             }
 
-            var memSteam = new MemoryStream(buffer);
-            var binReader = new BinaryReader(memSteam, Encoding.UTF8);
-            memSteam.Seek(4, SeekOrigin.Begin);
-            var info = new ServerInfo(ref binReader);
+            var ms = new MemoryStream(buffer);
+            var br = new BinaryReader(ms, Encoding.UTF8);
+
+            ms.Seek(4, SeekOrigin.Begin);
+            var info = new ServerInfo(ref br);
+
+            br.Close();
+            ms.Close();
 
             return info;
         }
@@ -60,8 +64,9 @@ public static class A2SQuery
 
                 var ms = new MemoryStream(buffer);
                 var br = new BinaryReader(ms, Encoding.UTF8);
+
                 ms.Seek(4, SeekOrigin.Begin);
-                _ = br.ReadByte();
+                _ = br.ReadByte(); // skip header
 
                 var playerInfo = new PlayerInfo[br.ReadByte()];
                 for (var i = 0; i < playerInfo.Length; i++)
