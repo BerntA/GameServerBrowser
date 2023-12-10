@@ -4,8 +4,9 @@ namespace GameServerList.Common.Model.A2S;
 
 public struct ServerInfo
 {
-    public ServerInfo(ref BinaryReader binReader)
+    public ServerInfo(string address, ref BinaryReader binReader)
     {
+        Address = address;
         Header = binReader.ReadByte();
         Protocol = binReader.ReadByte();
         Name = StringUtils.ReadNullTerminatedString(ref binReader);
@@ -56,6 +57,7 @@ public struct ServerInfo
         }
     }
 
+    public string Address { get; set; }
     public byte Header { get; set; }
     public byte Protocol { get; set; }
     public string Name { get; set; }
@@ -116,4 +118,23 @@ public struct ServerInfo
     public string Spectator { get; set; }
     public short SpectatorPort { get; set; }
     public short Port { get; set; }
+
+    public GameServerItem MapToGameServerItem(Game game)
+    {
+        return new GameServerItem
+        {
+            Name = this.Name,
+            Address = this.Address,
+            AppId = game.AppId,
+            GameDir = game.GameDir,
+            CurrentPlayers = this.Players,
+            MaxPlayers = this.MaxPlayers,
+            Map = this.Map,
+            OperatingSystem = (this.Environment == EnvironmentFlags.Windows) ? "w" : "l",
+            IsDedicatedServer = (this.ServerType == ServerTypeFlags.Dedicated),
+            IsVACEnabled = (this.Vac == VacFlags.Secured),
+            Bots = this.Bots,
+            Version = this.Version,
+        };
+    }
 }

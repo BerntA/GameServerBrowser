@@ -34,7 +34,7 @@ public static class A2SQuery
             var br = new BinaryReader(ms, Encoding.UTF8);
             ms.Seek(4, SeekOrigin.Begin);
 
-            var info = new ServerInfo(ref br);
+            var info = new ServerInfo(address, ref br);
 
             br.Close();
             ms.Close();
