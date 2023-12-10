@@ -5,7 +5,7 @@ namespace GameServerList.Tests;
 
 public class AdHocTests
 {
-    private const int timeout = 60000;
+    private const int timeout = 10000;
 
     public AdHocTests()
     {
@@ -51,7 +51,7 @@ public class AdHocTests
     public async Task MasterServerListTest()
     {
         var servers = await A2SQuery.QueryServerList(
-            "208.64.200.65:27015",
+            A2SQuery.MasterAddress,
             new Game { AppId = 215, GameDir = "hidden" },
             timeout
         );
@@ -59,6 +59,17 @@ public class AdHocTests
         var tasks = servers.Select(s => A2SQuery.QueryServerInfo(s.Address));
         var serverInfo = await Task.WhenAll(tasks);
 
-        Assert.True(true);
+        Assert.True(serverInfo?.Any(s => s.HasValue) ?? false);
+    }
+
+    [Fact]
+    public async Task MasterServerHLTest()
+    {
+        var servers = await A2SQuery.QueryServerList(
+            A2SQuery.MasterAddress,
+            new Game { AppId = 70, GameDir = "valve" },
+            timeout
+        );
+        Assert.True(servers?.Any() ?? false);
     }
 }
