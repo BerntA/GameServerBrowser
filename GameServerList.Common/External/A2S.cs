@@ -2,6 +2,8 @@
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
+using GameServerList.Common.Utils;
+using GameServerList.Common.Model;
 
 namespace GameServerList.Common.External;
 
@@ -28,8 +30,8 @@ public static class A2SQuery
 
             var ms = new MemoryStream(buffer);
             var br = new BinaryReader(ms, Encoding.UTF8);
-
             ms.Seek(4, SeekOrigin.Begin);
+
             var info = new ServerInfo(ref br);
 
             br.Close();
@@ -64,10 +66,9 @@ public static class A2SQuery
 
                 var ms = new MemoryStream(buffer);
                 var br = new BinaryReader(ms, Encoding.UTF8);
-
                 ms.Seek(4, SeekOrigin.Begin);
-                _ = br.ReadByte(); // skip header
 
+                _ = br.ReadByte(); // skip header
                 var playerInfo = new PlayerInfo[br.ReadByte()];
                 for (var i = 0; i < playerInfo.Length; i++)
                     playerInfo[i] = new PlayerInfo(ref br);
@@ -79,6 +80,50 @@ public static class A2SQuery
             }
 
             return null;
+        }
+        catch
+        {
+            return null;
+        }
+        finally
+        {
+            udpClient.Close();
+        }
+    }
+
+    public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 2500)
+    {
+        using var udpClient = new UdpClient();
+        using var cancellationToken = new CancellationTokenSource(timeout);
+
+        try
+        {
+            var info = new MasterInfo { Address = "0.0.0.0:0", IsSeed = false };
+            var servers = new List<MasterInfo>();
+            var endPoint = GetIPEndPoint(masterServerAddress);
+
+            do
+            {
+                var bytes = GetMasterQueryRequest(info.Address, targetGame);
+                var buffer = await GetData(udpClient, endPoint, bytes, cancellationToken.Token);
+
+                var ms = new MemoryStream(buffer);
+                var br = new BinaryReader(ms, Encoding.UTF8);
+                ms.Seek(6, SeekOrigin.Begin);
+
+                while (ms.Position < ms.Length)
+                {
+                    info = new MasterInfo(ref br);
+                    if (info.IsSeed)
+                        break; // break if last item was read out.
+                    servers.Add(info);
+                }
+
+                br.Close();
+                ms.Close();
+            } while (!info.IsSeed);
+
+            return servers;
         }
         catch
         {
@@ -105,5 +150,34 @@ public static class A2SQuery
         _ = ushort.TryParse(items[1], out var port);
 
         return new IPEndPoint(ip, port);
+    }
+
+    private static byte[] GetMasterQueryRequest(string address, Game game)
+    {
+        var bytes = new List<byte>
+        {
+            0x31, // default
+            0xFF // region 255 (world - any)
+        };
+
+        bytes.AddRange(StringUtils.WriteNullTerminatedString(address)); // initial IP = 0.0.0.0:0, if we find '0.0.0.0:0' in the returned buffer = end of list, otherwise use last ip:port to query for more servers!
+        bytes.AddRange(GetMasterQueryFilters(game)); // can be extended to support more filters.
+
+        return [.. bytes];
+    }
+
+    private static byte[] GetMasterQueryFilters(Game game)
+    {
+        if (game is null)
+            return [0x00];
+
+        var bldr = new StringBuilder();
+
+        bldr.Append($"\\appid\\{game.AppId}");
+
+        if (!string.IsNullOrEmpty(game.GameDir))
+            bldr.Append($"\\gamedir\\{game.GameDir}");
+
+        return StringUtils.WriteNullTerminatedString(bldr.ToString());
     }
 }

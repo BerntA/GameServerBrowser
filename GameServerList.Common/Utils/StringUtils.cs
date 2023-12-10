@@ -15,4 +15,9 @@ public static class StringUtils
         }
         return sb.ToString();
     }
+
+    public static byte[] WriteNullTerminatedString(string value)
+    {
+        return string.IsNullOrEmpty(value) ? [0x00] : [.. Encoding.UTF8.GetBytes(value), 0x00];
+    }
 }
