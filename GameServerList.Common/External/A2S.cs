@@ -93,7 +93,7 @@ public static class A2SQuery
         }
     }
 
-    public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 3000)
+    public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 10000)
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
