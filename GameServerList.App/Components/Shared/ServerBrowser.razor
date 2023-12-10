@@ -32,6 +32,12 @@
                 <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small" Class="mt-0"></MudTextField>
             </MudHidden>
         </ToolBarContent>
+        <ColGroup>
+            <col />
+            <col style="width:90px;" />
+            <col />
+            <col style="width:90px;" />
+        </ColGroup>
         <HeaderContent>
             <MudTh><MudTableSortLabel SortBy="new Func<GameServerItem, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel InitialDirection="SortDirection.Descending" SortBy="new Func<GameServerItem, object>(x => x.CurrentPlayers)">Players</MudTableSortLabel></MudTh>
