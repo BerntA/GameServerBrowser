@@ -23,4 +23,6 @@ public struct MasterInfo
 
     public string Address { get; set; }
     public bool IsSeed { get; set; }
+
+    public override readonly string ToString() => Address;
 }
