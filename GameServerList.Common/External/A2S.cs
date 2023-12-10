@@ -14,7 +14,7 @@ public static class A2SQuery
 
     public const string MasterAddress = "208.64.200.65:27015";
 
-    public static async Task<ServerInfo?> QueryServerInfo(string address, int timeout = 2500)
+    public static async Task<ServerInfo?> QueryServerInfo(string address, int timeout = 3000)
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
@@ -51,7 +51,7 @@ public static class A2SQuery
         }
     }
 
-    public static async Task<List<PlayerInfo>> QueryPlayerInfo(string address, int timeout = 2500)
+    public static async Task<List<PlayerInfo>> QueryPlayerInfo(string address, int timeout = 3000)
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
@@ -93,7 +93,7 @@ public static class A2SQuery
         }
     }
 
-    public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 2500)
+    public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 3000)
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
