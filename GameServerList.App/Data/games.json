@@ -98,12 +98,6 @@
       "appId": 17700
     },
     {
-      "name": "Insurgency: Modern Infantry Combat (MOD)",
-      "icon": "img/icons/ins",
-      "gamedir": "insurgency",
-      "appId": 215
-    },
-    {
       "name": "Infestus",
       "icon": "img/icons/infestus",
       "appId": 656800
@@ -185,7 +179,8 @@
     {
       "name": "Eternal Silence",
       "icon": "img/icons/es",
-      "appId": 17550
+      "gamedir": "Eternal-Silence",
+      "appId": 215
     },
     {
       "name": "Fistful of Frags",
@@ -308,6 +303,7 @@
       "name": "Hidden: Source",
       "icon": "img/icons/hidden",
       "gamedir": "hidden",
+      "useLegacyLookup": true,
       "appId": 215
     },
     {
@@ -338,6 +334,7 @@
       "name": "Zombie Master (CLASSIC)",
       "icon": "img/icons/zmaster",
       "gamedir": "zombie_master",
+      "useLegacyLookup": true,
       "appId": 215
     },
     {
@@ -404,6 +401,7 @@
       "name": "SMOD Troopers",
       "icon": "img/icons/hl2",
       "gamedir": "SmodTroopers",
+      "useLegacyLookup": true,
       "appId": 215
     },
     {

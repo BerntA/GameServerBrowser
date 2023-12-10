@@ -1,4 +1,5 @@
-﻿using GameServerList.Common.Model;
+﻿using GameServerList.Common.External;
+using GameServerList.Common.Model;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -39,7 +40,7 @@ public class SteamServerBrowserApiService
         if (game is null)
             return [];
 
-        var key = $"{game.AppId}{(string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"-{game.GameDir}")}";
+        var key = $"Servers-{game.AppId}{(string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"-{game.GameDir}")}";
 
         return await _cache.GetOrCreateAsync(key, async entry =>
         {
@@ -47,11 +48,22 @@ public class SteamServerBrowserApiService
 
             var gamedirFilter = string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"\\gamedir\\{game.GameDir}";
 
-            var servers = await Fetch<GameServerItem>(
-                $"IGameServersService/GetServerList/v1/?key={_apiKey}&limit={_querySize}&filter=appid\\{game.AppId}{gamedirFilter}"
-            );
-
-            return servers;
+            if (game.UseLegacyLookup ?? false)
+            {
+                var legacyServers = await A2SQuery.QueryServerList(A2SQuery.MasterAddress, game);
+                var tasks = legacyServers.Select(s => A2SQuery.QueryServerInfo(s.Address, 2000));
+                var servers = await Task.WhenAll(tasks);
+                return servers
+                    .Where(s => s.HasValue)
+                    .Select(s => s.Value.MapToGameServerItem(game))
+                    .ToList();
+            }
+            else
+            {
+                return await Fetch<GameServerItem>(
+                    $"IGameServersService/GetServerList/v1/?key={_apiKey}&limit={_querySize}&filter=appid\\{game.AppId}{gamedirFilter}"
+                );
+            }
         });
     }
 
