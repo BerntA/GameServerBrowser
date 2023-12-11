@@ -9,7 +9,7 @@
     }
     </MudSelect>
 
-    <MudTable Class="mt-3" Items="@GetServers()" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Xs" Loading="@_loading" LoadingProgressColor="Color.Info" SortLabel="Sort By" Height="75vh">
+    <MudTable Class="mt-3" Items="@GetServers()" Virtualize="true" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" SortLabel="Sort By" Height="75vh">
         <ToolBarContent>       
             <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
                 <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
@@ -32,12 +32,6 @@
                 <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small" Class="mt-0"></MudTextField>
             </MudHidden>
         </ToolBarContent>
-        <ColGroup>
-            <col />
-            <col style="width:90px;" />
-            <col />
-            <col style="width:90px;" />
-        </ColGroup>
         <HeaderContent>
             <MudTh><MudTableSortLabel SortBy="new Func<GameServerItem, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel InitialDirection="SortDirection.Descending" SortBy="new Func<GameServerItem, object>(x => x.CurrentPlayers)">Players</MudTableSortLabel></MudTh>
@@ -48,26 +42,58 @@
             <MudTd DataLabel="Name">@context.Name</MudTd>
             <MudTd DataLabel="Players">@(context.CurrentPlayers)/@(context.MaxPlayers)</MudTd>
             <MudTd DataLabel="Map">@context.Map</MudTd>
-            <MudTd>
-                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
-                    <MudTooltip>
-                        <ChildContent>
-                                <MudIcon Icon="@Icons.Material.Outlined.Info" Color="Color.Warning" Size="Size.Small" Class="mr-1" />
-                        </ChildContent>
-                        <TooltipContent>
-                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>OS</strong>: @(context.OperatingSystem == "w" ? "Windows" : "Linux")</MudText>
-                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>Version</strong>: @context.Version</MudText>
-                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>VAC</strong>: @((context.IsVACEnabled ?? false) ? "Yes" : "No")</MudText>
-                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>Dedicated Server</strong>: @((context.IsDedicatedServer ?? false) ? "Yes" : "No")</MudText>
-                            <MudText Align="Align.Left" Typo="Typo.body2"><strong>Bots</strong>: @context.Bots</MudText>
-                        </TooltipContent>                            
-                    </MudTooltip>
-                    <MudLink Href="@($"steam://connect/{context.Address}")">
-                        <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Title="Connect" Size="Size.Small" />
-                    </MudLink>
-                </MudHidden>
+            <MudTd HideSmall="true" Style="text-align:right">
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowOutward" Variant="Variant.Text" Color="Color.Info" Size="Size.Small" Title="Connect" Href="@($"steam://connect/{context.Address}")" />
+                <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowDown" Variant="Variant.Text" Color="Color.Info" Size="Size.Small" Title="Show/Hide server details" OnClick="async () => { await ToggleServerDetails(context); }" />
             </MudTd>
         </RowTemplate>
+        <ChildRowContent>
+        @if(context.ShouldShowDetails)
+        {
+            <MudTr>
+                <td colspan="4">
+                    <MudCard Elevation="0">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.button">Server Details</MudText>
+                                <MudDivider Light />
+                                <MudText Align="Align.Left" Typo="Typo.body2" Class="mt-4 ml-2 mb-0 pb-0">
+                                    <strong>OS</strong>: @(context.OperatingSystem == "w" ? "Windows" : "Linux"),
+                                    <strong>Version</strong>: @context.Version,
+                                    <strong>VAC</strong>: @((context.IsVACEnabled ?? false) ? "Yes" : "No"),
+                                    <strong>Dedicated Server</strong>: @((context.IsDedicatedServer ?? false) ? "Yes" : "No"),
+                                    <strong>Bots</strong>: @context.Bots
+                                </MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        @if (GetPlayerInfo(context)?.Any() ?? false)
+                        {
+                        <MudCardContent Class="pt-0 pb-4 pl-3 pr-3">
+                            <MudTable Items="@GetPlayerInfo(context)" Context="PlayerContext" Hover="true" Dense="true" FixedHeader="true" Breakpoint="Breakpoint.Xs" Elevation="0" Height="200px">
+	                            <ColGroup>
+		                            <col />
+		                            <col style="width:100px;"/>
+		                            <col style="width:100px;" />
+	                            </ColGroup>
+	                            <HeaderContent>
+		                            <MudTh>Player Name</MudTh>
+		                            <MudTh>Score</MudTh>
+		                            <MudTh>Time</MudTh>
+	                            </HeaderContent>
+	                            <RowTemplate>
+		                            <MudTd DataLabel="Player Name">@PlayerContext.Name</MudTd>
+		                            <MudTd DataLabel="Score">@PlayerContext.Score</MudTd>
+		                            <MudTd DataLabel="Time">@PlayerContext.GetDurationPlayed()</MudTd>
+	                            </RowTemplate>
+                            </MudTable>
+                        </MudCardContent>
+                        }
+                        </MudCard>
+                    <MudDivider Light />
+                </td>                
+            </MudTr>
+        }
+        </ChildRowContent>
     </MudTable>
 </MudContainer>
 
@@ -93,6 +119,12 @@
         _loading = false;
     }
 
+    protected async Task ToggleServerDetails(GameServerItem element)
+    {        
+        element.ActivePlayers = await _serverPlayerInfoService.FetchPlayerDetails(element.Address);
+        element.ShouldShowDetails = !element.ShouldShowDetails;
+    }
+
     protected List<GameServerItem> GetServers()
     {
         if (_servers is null)
@@ -111,5 +143,10 @@
         _serversFound = items.Count;
 
         return items;
+    }
+
+    protected List<PlayerInfo> GetPlayerInfo(GameServerItem element)
+    {
+        return element.ActivePlayers;
     }
 }
