@@ -81,11 +81,11 @@ public static class A2SQuery
                 return [.. playerInfo];
             }
 
-            return null;
+            return [];
         }
         catch
         {
-            return null;
+            return [];
         }
         finally
         {
@@ -97,11 +97,11 @@ public static class A2SQuery
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
+        var servers = new List<MasterInfo>();
 
         try
         {
             var info = new MasterInfo { Address = "0.0.0.0:0", IsSeed = false };
-            var servers = new List<MasterInfo>();
             var endPoint = GetIPEndPoint(masterServerAddress);
 
             do
@@ -129,7 +129,7 @@ public static class A2SQuery
         }
         catch
         {
-            return null;
+            return servers;
         }
         finally
         {

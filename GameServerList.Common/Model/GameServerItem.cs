@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GameServerList.Common.Model.A2S;
+using Newtonsoft.Json;
 
 namespace GameServerList.Common.Model;
 
@@ -40,5 +41,13 @@ public class GameServerItem
 
     [JsonProperty("bots")]
     public int? Bots { get; set; }
+    #endregion
+
+    #region PlayerInfo
+    [JsonIgnore]
+    public List<PlayerInfo>? ActivePlayers { get; set; }
+
+    [JsonIgnore]
+    public bool ShouldShowDetails { get; set; } = false;
     #endregion
 }

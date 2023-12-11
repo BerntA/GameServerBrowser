@@ -13,6 +13,7 @@ services.AddMemoryCache();
 
 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 services.AddSingleton<SteamServerBrowserApiService>();
+services.AddSingleton<SteamPlayerDetailApiService>();
 
 services.AddRazorComponents()
     .AddInteractiveServerComponents();

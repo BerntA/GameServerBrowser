@@ -17,6 +17,19 @@ public struct PlayerInfo
     public int Score { get; set; }
     public float Duration { get; set; }
 
+    public string GetDurationPlayed()
+    {
+        if (float.IsNaN(Duration))
+            return string.Empty;
+
+        if (Duration > 86400)
+            return "Days";
+
+        return TimeSpan
+            .FromSeconds(Duration)
+            .ToString(@"hh\:mm\:ss");
+    }
+
     public override string ToString()
     {
         return Name;
