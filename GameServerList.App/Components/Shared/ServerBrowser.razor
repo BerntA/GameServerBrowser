@@ -1,5 +1,5 @@
 ﻿<MudContainer Class="mt-3" MaxWidth="MaxWidth.ExtraExtraLarge">
-    <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" ValueChanged=@SelectedGame>
+    <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" ValueChanged=@SelectedGame>
     @foreach (var item in GameList.Games.Select((g, i) => new { game = g, index = i }))
     {
         <MudSelectItem Value="@(item.index)">
