@@ -1,4 +1,5 @@
 ﻿using GameServerList.Common.External;
+using GameServerList.Common.Model;
 using GameServerList.Common.Model.A2S;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
@@ -14,8 +15,12 @@ public class SteamPlayerDetailApiService
         _cache = memoryCache;
     }
 
-    public async Task<List<PlayerInfo>> FetchPlayerDetails(string address)
+    public async Task<List<PlayerInfo>> FetchPlayerDetails(GameServerItem server)
     {
+        if (server.CurrentPlayers <= 0)
+            return [];
+
+        var address = server.Address;
         var key = $"PlayerDetails-{address}";
         return await _cache.GetOrCreateAsync(key, async entry =>
         {

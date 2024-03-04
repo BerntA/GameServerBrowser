@@ -121,7 +121,7 @@
 
     protected async Task ToggleServerDetails(GameServerItem element)
     {        
-        element.ActivePlayers = await _serverPlayerInfoService.FetchPlayerDetails(element.Address);
+        element.ActivePlayers = await _serverPlayerInfoService.FetchPlayerDetails(element);
         element.ShouldShowDetails = !element.ShouldShowDetails;
     }
 
