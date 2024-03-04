@@ -22,7 +22,12 @@ public struct ServerInfo
         Visibility = (VisibilityFlags)binReader.ReadByte();
         Vac = (VacFlags)binReader.ReadByte();
         Version = StringUtils.ReadNullTerminatedString(ref binReader);
-        ExtraDataFlag = (ExtraDataFlags)binReader.ReadByte();
+
+        if (binReader.BaseStream.Position != binReader.BaseStream.Length)
+            ExtraDataFlag = (ExtraDataFlags)binReader.ReadByte();
+        else
+            ExtraDataFlag = ExtraDataFlags.None;
+
         GameId = 0;
         SteamId = 0;
         Keywords = null;
@@ -78,6 +83,7 @@ public struct ServerInfo
     [Flags]
     public enum ExtraDataFlags : byte
     {
+        None = 0x00,
         GameId = 0x01,
         SteamId = 0x10,
         Keywords = 0x20,
