@@ -203,11 +203,6 @@
       "appId": 2158860
     },
     {
-      "name": "Lambda Wars",
-      "icon": "img/icons/lambdawars",
-      "appId": 270370
-    },
-    {
       "name": "Military Conflict: Vietnam",
       "icon": "img/icons/mcv",
       "appId": 1012110
@@ -303,7 +298,7 @@
       "name": "Hidden: Source",
       "icon": "img/icons/hidden",
       "gamedir": "hidden",
-      "useLegacyLookup": true,
+      "masterServer": "Source",
       "appId": 215
     },
     {
@@ -334,7 +329,7 @@
       "name": "Zombie Master (CLASSIC)",
       "icon": "img/icons/zmaster",
       "gamedir": "zombie_master",
-      "useLegacyLookup": true,
+      "masterServer": "Source",
       "appId": 215
     },
     {
@@ -401,7 +396,7 @@
       "name": "SMOD Troopers",
       "icon": "img/icons/hl2",
       "gamedir": "SmodTroopers",
-      "useLegacyLookup": true,
+      "masterServer": "Source",
       "appId": 215
     },
     {
@@ -415,6 +410,43 @@
       "icon": "img/icons/hl2",
       "gamedir": "orion",
       "appId": 218
+    },
+    {
+      "name": "Insurgency",
+      "icon": "img/icons/ins2",
+      "appId": 222880
+    },
+    {
+      "name": "Day of Infamy",
+      "icon": "img/icons/doi",
+      "appId": 447820
+    },
+    {
+      "name": "Counter-Strike",
+      "icon": "img/icons/cstrike",
+      "appId": 10,
+      "masterServer": "GoldSrc",
+      "uniqueIPPerServer": true
+    },
+    {
+      "name": "Counter-Strike: Condition Zero",
+      "icon": "img/icons/czero",
+      "appId": 80,
+      "masterServer": "GoldSrc"
+    },
+    {
+      "name": "Counter-Strike: Source",
+      "icon": "img/icons/css",
+      "appId": 240,
+      "masterServer": "Source",
+      "uniqueIPPerServer": true
+    },
+    {
+      "name": "Counter-Strike 2",
+      "icon": "img/icons/cs2",
+      "appId": 730,
+      "masterServer": "Source",
+      "uniqueIPPerServer": true
     }
   ]
 }

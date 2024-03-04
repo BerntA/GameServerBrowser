@@ -1,4 +1,6 @@
-﻿namespace GameServerList.Common.Model;
+﻿using GameServerList.Common.Model.A2S;
+
+namespace GameServerList.Common.Model;
 
 public class Game
 {
@@ -6,5 +8,7 @@ public class Game
     public string? GameDir { get; set; }
     public string? Icon { get; set; }
     public long? AppId { get; set; }
-    public bool? UseLegacyLookup { get; set; }
+    public MasterServer? MasterServer { get; set; }
+    public bool? UniqueIPPerServer { get; set; }
+    public string? Filters { get; set; }
 }

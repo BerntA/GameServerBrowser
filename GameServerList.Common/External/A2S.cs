@@ -12,9 +12,20 @@ public static class A2SQuery
     private static readonly byte[] ServerRequest = { 0xFF, 0xFF, 0xFF, 0xFF, 0x54, 0x53, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x20, 0x45, 0x6E, 0x67, 0x69, 0x6E, 0x65, 0x20, 0x51, 0x75, 0x65, 0x72, 0x79, 0x00 };
     private static readonly byte[] PlayerRequest = { 0xFF, 0xFF, 0xFF, 0xFF, 0x55, 0xFF, 0xFF, 0xFF, 0xFF };
 
-    public const string MasterAddress = "208.64.200.65:27015";
+    public const string SourceMasterServer = "208.64.200.65:27015";
+    public const string GoldSrcMasterServer = "208.78.164.209:27011";
 
-    public static async Task<ServerInfo?> QueryServerInfo(string address, int timeout = 3000)
+    public static string GetMasterServerAddress(MasterServer masterServer)
+    {
+        return masterServer switch
+        {
+            MasterServer.Source => SourceMasterServer,
+            MasterServer.GoldSrc => GoldSrcMasterServer,
+            _ => throw new ArgumentException("Invalid master server!"),
+        };
+    }
+
+    public static async Task<ServerInfo?> QueryServerInfo(string address, int timeout = 2000)
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
@@ -24,10 +35,11 @@ public static class A2SQuery
             var endPoint = GetIPEndPoint(address);
             var buffer = await GetData(udpClient, endPoint, ServerRequest, cancellationToken.Token);
 
-            if (buffer.Length == 25 && buffer[4] == 0x41)
+            // Handle S2C_CHALLENGE, append 4 byte challenge
+            if (buffer.Length == 9 && (buffer[4] == 0x41 || buffer[4] == 0x65))
             {
-                buffer[4] = 0x54;
-                buffer = await GetData(udpClient, endPoint, buffer, cancellationToken.Token);
+                var packetWithChallenge = ServerRequest.Concat(buffer[5..]).ToArray();
+                buffer = await GetData(udpClient, endPoint, packetWithChallenge, cancellationToken.Token);
             }
 
             var ms = new MemoryStream(buffer);
@@ -51,7 +63,7 @@ public static class A2SQuery
         }
     }
 
-    public static async Task<List<PlayerInfo>> QueryPlayerInfo(string address, int timeout = 3000)
+    public static async Task<List<PlayerInfo>> QueryPlayerInfo(string address, int timeout = 2500)
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
@@ -93,7 +105,7 @@ public static class A2SQuery
         }
     }
 
-    public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 10000)
+    public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 15000)
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
@@ -179,6 +191,9 @@ public static class A2SQuery
 
         if (!string.IsNullOrEmpty(game.GameDir))
             bldr.Append($"\\gamedir\\{game.GameDir}");
+
+        if (!string.IsNullOrEmpty(game.Filters))
+            bldr.Append(game.Filters);
 
         return StringUtils.WriteNullTerminatedString(bldr.ToString());
     }

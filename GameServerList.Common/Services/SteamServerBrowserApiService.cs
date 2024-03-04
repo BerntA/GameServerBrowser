@@ -47,12 +47,20 @@ public class SteamServerBrowserApiService
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
 
             var gamedirFilter = string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"\\gamedir\\{game.GameDir}";
+            var extraFilters = string.IsNullOrEmpty(game.Filters) ? string.Empty : game.Filters;
 
-            if (game.UseLegacyLookup ?? false)
+            if (game.MasterServer.HasValue)
             {
-                var legacyServers = await A2SQuery.QueryServerList(A2SQuery.MasterAddress, game);
-                var tasks = legacyServers.Select(s => A2SQuery.QueryServerInfo(s.Address, 2000));
+                var legacyServers = await A2SQuery.QueryServerList(
+                    A2SQuery.GetMasterServerAddress(game.MasterServer.Value), game
+                );
+
+                if (game.UniqueIPPerServer ?? false)
+                    legacyServers = legacyServers.DistinctBy(s => s.IP).ToList();
+
+                var tasks = legacyServers.Select(s => A2SQuery.QueryServerInfo(s.Address));
                 var servers = await Task.WhenAll(tasks);
+
                 return servers
                     .Where(s => s.HasValue)
                     .Select(s => s.Value.MapToGameServerItem(game))
@@ -61,7 +69,7 @@ public class SteamServerBrowserApiService
             else
             {
                 return await Fetch<GameServerItem>(
-                    $"IGameServersService/GetServerList/v1/?key={_apiKey}&limit={_querySize}&filter=appid\\{game.AppId}{gamedirFilter}"
+                    $"IGameServersService/GetServerList/v1/?key={_apiKey}&limit={_querySize}&filter=appid\\{game.AppId}{gamedirFilter}{extraFilters}"
                 );
             }
         });
