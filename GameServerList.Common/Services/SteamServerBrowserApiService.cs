@@ -1,5 +1,6 @@
 ﻿using GameServerList.Common.External;
 using GameServerList.Common.Model;
+using GameServerList.Common.Model.A2S;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -62,7 +63,17 @@ public class SteamServerBrowserApiService
                 var servers = await Task.WhenAll(tasks);
 
                 return servers
-                    .Where(s => s.HasValue)
+                    .Where(s =>
+                    {
+                        if (
+                        !s.HasValue ||
+                        (s.Value.MaxPlayers > 128) ||
+                        (game.MasterServer.Value == MasterServer.GoldSrc && !s.Value.Version.EndsWith("/Stdio"))
+                        )
+                            return false;
+
+                        return true;
+                    })
                     .Select(s => s.Value.MapToGameServerItem(game))
                     .ToList();
             }
