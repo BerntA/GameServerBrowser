@@ -2,9 +2,14 @@
 using GameServerList.Common.Model;
 using Newtonsoft.Json;
 
-var appId = 730L;
-var timeout = 3600000; // 1 hour
+var appId = 0UL;
+var timeout = 1800000;
 var maxServersPerIp = 5;
+
+Console.Write("Please specify the appId: ");
+
+while (!ulong.TryParse(Console.ReadLine(), out appId) || appId == 0UL)
+    Console.Write("Invalid appId specified, try again: ");
 
 Console.WriteLine($"Scanning AppId {appId} for servers...");
 
@@ -51,3 +56,4 @@ File.WriteAllText(
 );
 
 Console.WriteLine("Scanning successful, check 'out' folder for any generated data.");
+Console.ReadKey();

@@ -12,7 +12,7 @@ public class GameServerItem
     public string? Address { get; set; }
 
     [JsonProperty("appid")]
-    public long? AppId { get; set; }
+    public ulong? AppId { get; set; }
 
     [JsonProperty("gamedir")]
     public string? GameDir { get; set; }
