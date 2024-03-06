@@ -32,26 +32,14 @@ public static class A2SQuery
 
         try
         {
-            var endPoint = GetIPEndPoint(address);
-            var buffer = await GetData(udpClient, endPoint, ServerRequest, cancellationToken.Token);
+            var endpoint = GetIPEndPoint(address);
+            var buffer = await udpClient.QueryServerAsync(endpoint, ServerRequest, cancellationToken.Token);
 
-            // Handle S2C_CHALLENGE, append 4 byte challenge
-            if (buffer.Length == 9 && (buffer[4] == 0x41 || buffer[4] == 0x65))
-            {
-                var packetWithChallenge = ServerRequest.Concat(buffer[5..]).ToArray();
-                buffer = await GetData(udpClient, endPoint, packetWithChallenge, cancellationToken.Token);
-            }
-
-            var ms = new MemoryStream(buffer);
-            var br = new BinaryReader(ms, Encoding.UTF8);
+            using var ms = new MemoryStream(buffer);
+            using var br = new BinaryReader(ms, Encoding.UTF8);
             ms.Seek(4, SeekOrigin.Begin);
 
-            var info = new ServerInfo(address, ref br);
-
-            br.Close();
-            ms.Close();
-
-            return info;
+            return new ServerInfo(address, br);
         }
         catch
         {
@@ -67,37 +55,26 @@ public static class A2SQuery
     {
         using var udpClient = new UdpClient();
         using var cancellationToken = new CancellationTokenSource(timeout);
+        var players = new List<PlayerInfo>();
 
         try
         {
-            var endPoint = GetIPEndPoint(address);
-            var buffer = await GetData(udpClient, endPoint, PlayerRequest, cancellationToken.Token);
+            var endpoint = GetIPEndPoint(address);
+            var buffer = await udpClient.QueryServerAsync(endpoint, PlayerRequest, cancellationToken.Token);
 
-            if (buffer.Length == 9 && buffer[4] == 0x41)
-            {
-                buffer[4] = 0x55;
-                buffer = await GetData(udpClient, endPoint, buffer, cancellationToken.Token);
+            using var ms = new MemoryStream(buffer);
+            using var br = new BinaryReader(ms, Encoding.UTF8);
+            ms.Seek(5, SeekOrigin.Begin);
 
-                var ms = new MemoryStream(buffer);
-                var br = new BinaryReader(ms, Encoding.UTF8);
-                ms.Seek(4, SeekOrigin.Begin);
+            var numPlayers = br.ReadByte();
+            for (var i = 0; i < numPlayers; i++)
+                players.Add(new PlayerInfo(br));
 
-                _ = br.ReadByte(); // skip header
-                var playerInfo = new PlayerInfo[br.ReadByte()];
-                for (var i = 0; i < playerInfo.Length; i++)
-                    playerInfo[i] = new PlayerInfo(ref br);
-
-                br.Close();
-                ms.Close();
-
-                return [.. playerInfo];
-            }
-
-            return [];
+            return players;
         }
         catch
         {
-            return [];
+            return players;
         }
         finally
         {
@@ -114,27 +91,24 @@ public static class A2SQuery
         try
         {
             var info = new MasterInfo { Address = "0.0.0.0:0", IsSeed = false };
-            var endPoint = GetIPEndPoint(masterServerAddress);
+            var endpoint = GetIPEndPoint(masterServerAddress);
 
             do
             {
                 var bytes = GetMasterQueryRequest(info.Address, targetGame);
-                var buffer = await GetData(udpClient, endPoint, bytes, cancellationToken.Token);
+                var buffer = await udpClient.SendAndReceiveAsync(endpoint, bytes, cancellationToken.Token);
 
-                var ms = new MemoryStream(buffer);
-                var br = new BinaryReader(ms, Encoding.UTF8);
+                using var ms = new MemoryStream(buffer);
+                using var br = new BinaryReader(ms, Encoding.UTF8);
                 ms.Seek(6, SeekOrigin.Begin);
 
                 while (ms.Position < ms.Length)
                 {
-                    info = new MasterInfo(ref br);
+                    info = new MasterInfo(br);
                     if (info.IsSeed)
                         break; // break if last item was read out.
                     servers.Add(info);
                 }
-
-                br.Close();
-                ms.Close();
             } while (!info.IsSeed);
 
             return servers;
@@ -147,13 +121,6 @@ public static class A2SQuery
         {
             udpClient.Close();
         }
-    }
-
-    private static async Task<byte[]> GetData(UdpClient client, IPEndPoint endpoint, byte[] data, CancellationToken cancellationToken)
-    {
-        await client.SendAsync(data, data.Length, endpoint);
-        var response = await client.ReceiveAsync(cancellationToken);
-        return response.Buffer;
     }
 
     private static IPEndPoint GetIPEndPoint(string address)

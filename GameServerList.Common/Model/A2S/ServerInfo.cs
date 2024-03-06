@@ -4,27 +4,27 @@ namespace GameServerList.Common.Model.A2S;
 
 public struct ServerInfo
 {
-    public ServerInfo(string address, ref BinaryReader binReader)
+    public ServerInfo(string address, BinaryReader br)
     {
         Address = address;
-        Header = binReader.ReadByte();
-        Protocol = binReader.ReadByte();
-        Name = StringUtils.ReadNullTerminatedString(ref binReader);
-        Map = StringUtils.ReadNullTerminatedString(ref binReader);
-        Folder = StringUtils.ReadNullTerminatedString(ref binReader);
-        Game = StringUtils.ReadNullTerminatedString(ref binReader);
-        Id = binReader.ReadInt16();
-        Players = binReader.ReadByte();
-        MaxPlayers = binReader.ReadByte();
-        Bots = binReader.ReadByte();
-        ServerType = (ServerTypeFlags)binReader.ReadByte();
-        Environment = (EnvironmentFlags)binReader.ReadByte();
-        Visibility = (VisibilityFlags)binReader.ReadByte();
-        Vac = (VacFlags)binReader.ReadByte();
-        Version = StringUtils.ReadNullTerminatedString(ref binReader);
+        Header = br.ReadByte();
+        Protocol = br.ReadByte();
+        Name = StringUtils.ReadNullTerminatedString(br);
+        Map = StringUtils.ReadNullTerminatedString(br);
+        Folder = StringUtils.ReadNullTerminatedString(br);
+        Game = StringUtils.ReadNullTerminatedString(br);
+        Id = br.ReadInt16();
+        Players = br.ReadByte();
+        MaxPlayers = br.ReadByte();
+        Bots = br.ReadByte();
+        ServerType = (ServerTypeFlags)br.ReadByte();
+        Environment = (EnvironmentFlags)br.ReadByte();
+        Visibility = (VisibilityFlags)br.ReadByte();
+        Vac = (VacFlags)br.ReadByte();
+        Version = StringUtils.ReadNullTerminatedString(br);
 
-        if (binReader.BaseStream.Position != binReader.BaseStream.Length)
-            ExtraDataFlag = (ExtraDataFlags)binReader.ReadByte();
+        if (br.BaseStream.Position != br.BaseStream.Length)
+            ExtraDataFlag = (ExtraDataFlags)br.ReadByte();
         else
             ExtraDataFlag = ExtraDataFlags.None;
 
@@ -37,28 +37,28 @@ public struct ServerInfo
 
         if (ExtraDataFlag.HasFlag(ExtraDataFlags.Port))
         {
-            Port = binReader.ReadInt16();
+            Port = br.ReadInt16();
         }
 
         if (ExtraDataFlag.HasFlag(ExtraDataFlags.SteamId))
         {
-            SteamId = binReader.ReadUInt64();
+            SteamId = br.ReadUInt64();
         }
 
         if (ExtraDataFlag.HasFlag(ExtraDataFlags.Spectator))
         {
-            SpectatorPort = binReader.ReadInt16();
-            Spectator = StringUtils.ReadNullTerminatedString(ref binReader);
+            SpectatorPort = br.ReadInt16();
+            Spectator = StringUtils.ReadNullTerminatedString(br);
         }
 
         if (ExtraDataFlag.HasFlag(ExtraDataFlags.Keywords))
         {
-            Keywords = StringUtils.ReadNullTerminatedString(ref binReader);
+            Keywords = StringUtils.ReadNullTerminatedString(br);
         }
 
         if (ExtraDataFlag.HasFlag(ExtraDataFlags.GameId))
         {
-            GameId = binReader.ReadUInt64();
+            GameId = br.ReadUInt64();
         }
     }
 

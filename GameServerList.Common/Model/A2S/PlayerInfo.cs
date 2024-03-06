@@ -4,12 +4,12 @@ namespace GameServerList.Common.Model.A2S;
 
 public struct PlayerInfo
 {
-    public PlayerInfo(ref BinaryReader binReader)
+    public PlayerInfo(BinaryReader br)
     {
-        Index = binReader.ReadByte();
-        Name = StringUtils.ReadNullTerminatedString(ref binReader);
-        Score = binReader.ReadInt32();
-        Duration = binReader.ReadSingle();
+        Index = br.ReadByte();
+        Name = StringUtils.ReadNullTerminatedString(br);
+        Score = br.ReadInt32();
+        Duration = br.ReadSingle();
     }
 
     public byte Index { get; set; }

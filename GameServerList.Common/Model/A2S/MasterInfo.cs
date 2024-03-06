@@ -2,15 +2,15 @@
 
 public struct MasterInfo
 {
-    public MasterInfo(ref BinaryReader binReader)
+    public MasterInfo(BinaryReader br)
     {
         var octets = new byte[4];
         for (var i = 0; i < octets.Length; i++)
-            octets[i] = binReader.ReadByte();
+            octets[i] = br.ReadByte();
 
         ushort port;
-        byte portByte1 = binReader.ReadByte();
-        byte portByte2 = binReader.ReadByte();
+        byte portByte1 = br.ReadByte();
+        byte portByte2 = br.ReadByte();
 
         if (BitConverter.IsLittleEndian)
             port = BitConverter.ToUInt16([portByte2, portByte1], 0);

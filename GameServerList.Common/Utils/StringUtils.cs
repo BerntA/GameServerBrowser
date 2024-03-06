@@ -4,7 +4,7 @@ namespace GameServerList.Common.Utils;
 
 public static class StringUtils
 {
-    public static string ReadNullTerminatedString(ref BinaryReader input)
+    public static string ReadNullTerminatedString(BinaryReader input)
     {
         var sb = new StringBuilder();
         var read = input.ReadChar();
