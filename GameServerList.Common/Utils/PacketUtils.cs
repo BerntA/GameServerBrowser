@@ -22,7 +22,7 @@ public static class PacketUtils
             return new MultiPacketInfo
             {
                 Header = header,
-                Payload = buffer[(int)br.BaseStream.Position..]
+                Payload = buffer
             };
         }
 
