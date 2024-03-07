@@ -1,4 +1,5 @@
 ﻿using GameServerList.Common.Model;
+using GameServerList.Common.Utils;
 using Newtonsoft.Json;
 
 namespace GameServerList.Helpers;
@@ -17,13 +18,21 @@ public static class GameList
 
     public static void LoadGameList()
     {
-        var text = File.ReadAllText("Data/games.json");
-
-        if (string.IsNullOrEmpty(text))
+        var gameData = FileUtils.LoadDataFromFile<List<Game>>("Data/games.json");
+        if (gameData is null)
             return;
 
-        var data = JsonConvert.DeserializeObject<dynamic>(text);
-        Games = JsonConvert.DeserializeObject<List<Game>>(data.GameList.ToString());
-        Games = Games.OrderBy(g => g.Name).ToList();
+        Games = [.. gameData.OrderBy(g => g.Name)];
+
+        foreach (var game in Games)
+        {
+            var loadServerList = (game.UseDefinedServerList ?? false);
+            if (!loadServerList) continue;
+
+            var serverListData = FileUtils.LoadDataFromFile<List<string>>($"Data/{game.AppId}_addresses.json");
+            if (serverListData is null) continue;
+
+            game.Servers = serverListData;
+        }
     }
 }
