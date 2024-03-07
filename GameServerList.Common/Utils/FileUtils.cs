@@ -15,4 +15,10 @@ public static class FileUtils
 
         return JsonConvert.DeserializeObject<T>(content);
     }
+
+    public static void WriteDataToFile<T>(string path, T data)
+    {
+        var content = JsonConvert.SerializeObject(data, Formatting.Indented);
+        File.WriteAllText(path, content);
+    }
 }

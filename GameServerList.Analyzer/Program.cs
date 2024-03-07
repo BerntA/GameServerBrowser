@@ -1,6 +1,6 @@
 ﻿using GameServerList.Common.External;
 using GameServerList.Common.Model;
-using Newtonsoft.Json;
+using GameServerList.Common.Utils;
 
 var appId = 0UL;
 var timeout = 1800000;
@@ -45,15 +45,8 @@ Console.WriteLine($"Writing {filteredIPs.Count} servers to disk!");
 
 Directory.CreateDirectory("./out");
 
-File.WriteAllText(
-    $"./out/{appId}_servers.json",
-    JsonConvert.SerializeObject(serversWithInfoFiltered, Formatting.Indented)
-);
-
-File.WriteAllText(
-    $"./out/{appId}_addresses.json",
-    JsonConvert.SerializeObject(filteredIPs, Formatting.Indented)
-);
+FileUtils.WriteDataToFile($"./out/{appId}_servers.json", serversWithInfoFiltered);
+FileUtils.WriteDataToFile($"./out/{appId}_addresses.json", filteredIPs);
 
 Console.WriteLine("Scanning successful, check 'out' folder for any generated data.");
 Console.ReadKey();
