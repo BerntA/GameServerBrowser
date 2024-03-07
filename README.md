@@ -11,6 +11,7 @@ Edit the 'GameServerList.App/Data/games.json' file.
 - Queries Steam WEB API to retrieve server info for games & mods
 - Utilizes A2S queries to retrieve player info, and server info for legacy mods (e.g appId 215 related games)
 - Supports querying master server list, player info and server info via A2S
+- Handles split packets & compression
 
 ### CI
 [![Deploy on Linux](https://github.com/BerntA/GameServerBrowser/actions/workflows/deploy-linux.yml/badge.svg)](https://github.com/BerntA/GameServerBrowser/actions/workflows/deploy-linux.yml)
