@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Concurrent;
 using System.Net;
 
 namespace GameServerList.Common.Services;
@@ -49,27 +50,15 @@ public class SteamServerBrowserApiService
 
             if (game.UseDefinedServerList ?? false)
             {
-                var tasks = game.Servers.Select(s => A2SQuery.QueryServerInfo(s));
-                var servers = await Task.WhenAll(tasks);
-
-                return servers
-                    .Where(s => IsServerValid(game, s))
-                    .Select(s => s.Value.MapToGameServerItem(game))
-                    .ToList();
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+                return await QueryServers(game, game.Servers);
             }
             else if (game.MasterServer.HasValue)
             {
                 var legacyServers = await A2SQuery.QueryServerList(
                     A2SQuery.GetMasterServerAddress(game.MasterServer.Value), game
                 );
-
-                var tasks = legacyServers.Select(s => A2SQuery.QueryServerInfo(s.Address));
-                var servers = await Task.WhenAll(tasks);
-
-                return servers
-                    .Where(s => IsServerValid(game, s))
-                    .Select(s => s.Value.MapToGameServerItem(game))
-                    .ToList();
+                return await QueryServers(game, legacyServers.Select(s => s.Address).ToList());
             }
             else
             {
@@ -115,5 +104,17 @@ public class SteamServerBrowserApiService
         {
             return [];
         }
+    }
+
+    private static async Task<List<GameServerItem>> QueryServers(Game game, List<string> servers, int timeout = 1500)
+    {
+        var items = new ConcurrentBag<GameServerItem>();
+        await Parallel.ForEachAsync(servers, async (address, _) =>
+        {
+            var obj = await A2SQuery.QueryServerInfo(address, timeout);
+            if (IsServerValid(game, obj))
+                items.Add(obj.Value.MapToGameServerItem(game));
+        });
+        return [.. items];
     }
 }
