@@ -41,49 +41,60 @@ public class SteamServerBrowserApiService
         if (game is null)
             return [];
 
-        var key = $"Servers-{game.AppId}{(string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"-{game.GameDir}")}";
+        var key = $"Servers-{game.AppId}-{game.Name}".ToUpper();
 
         return await _cache.GetOrCreateAsync(key, async entry =>
         {
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
 
-            var gamedirFilter = string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"\\gamedir\\{game.GameDir}";
-            var extraFilters = string.IsNullOrEmpty(game.Filters) ? string.Empty : game.Filters;
+            if (game.UseDefinedServerList ?? false)
+            {
+                var tasks = game.Servers.Select(s => A2SQuery.QueryServerInfo(s));
+                var servers = await Task.WhenAll(tasks);
 
-            if (game.MasterServer.HasValue)
+                return servers
+                    .Where(s => IsServerValid(game, s))
+                    .Select(s => s.Value.MapToGameServerItem(game))
+                    .ToList();
+            }
+            else if (game.MasterServer.HasValue)
             {
                 var legacyServers = await A2SQuery.QueryServerList(
                     A2SQuery.GetMasterServerAddress(game.MasterServer.Value), game
                 );
 
-                if (game.UniqueIPPerServer ?? false)
-                    legacyServers = legacyServers.DistinctBy(s => s.IP).ToList();
-
                 var tasks = legacyServers.Select(s => A2SQuery.QueryServerInfo(s.Address));
                 var servers = await Task.WhenAll(tasks);
 
                 return servers
-                    .Where(s =>
-                    {
-                        if (
-                        !s.HasValue ||
-                        (s.Value.MaxPlayers > 128) ||
-                        (game.MasterServer.Value == MasterServer.GoldSrc && !s.Value.Version.EndsWith("/Stdio"))
-                        )
-                            return false;
-
-                        return true;
-                    })
+                    .Where(s => IsServerValid(game, s))
                     .Select(s => s.Value.MapToGameServerItem(game))
                     .ToList();
             }
             else
             {
+                var gamedirFilter = string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"\\gamedir\\{game.GameDir}";
+                var extraFilters = string.IsNullOrEmpty(game.Filters) ? string.Empty : game.Filters;
+
                 return await Fetch<GameServerItem>(
                     $"IGameServersService/GetServerList/v1/?key={_apiKey}&limit={_querySize}&filter=appid\\{game.AppId}{gamedirFilter}{extraFilters}"
                 );
             }
         });
+    }
+
+    private static bool IsServerValid(Game game, ServerInfo? server)
+    {
+        if (server is null || !server.HasValue)
+            return false;
+
+        if (server.Value.MaxPlayers > 128 || server.Value.MaxPlayers <= 1)
+            return false;
+
+        if (game.MasterServer.HasValue && game.MasterServer.Value == MasterServer.GoldSrc && !server.Value.Version.EndsWith("/Stdio"))
+            return false;
+
+        return true;
     }
 
     private async Task<List<T>> Fetch<T>(string url)
