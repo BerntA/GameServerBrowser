@@ -1,6 +1,5 @@
 ﻿using GameServerList.Common.Model;
 using GameServerList.Common.Utils;
-using Newtonsoft.Json;
 
 namespace GameServerList.Helpers;
 

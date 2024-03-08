@@ -15,6 +15,8 @@ services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 services.AddSingleton<SteamServerBrowserApiService>();
 services.AddSingleton<SteamPlayerDetailApiService>();
 
+services.AddHostedService<GameServerWorker>();
+
 services.AddRazorComponents()
     .AddInteractiveServerComponents();
 

@@ -15,4 +15,7 @@ public class Game
 
     [JsonIgnore]
     public List<string>? Servers { get; set; }
+
+    [JsonIgnore]
+    public List<GameServerItem>? GameServers { get; set; }
 }

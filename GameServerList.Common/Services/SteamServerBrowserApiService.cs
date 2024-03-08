@@ -1,11 +1,8 @@
-﻿using GameServerList.Common.External;
-using GameServerList.Common.Model;
-using GameServerList.Common.Model.A2S;
+﻿using GameServerList.Common.Model;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Collections.Concurrent;
 using System.Net;
 
 namespace GameServerList.Common.Services;
@@ -48,18 +45,8 @@ public class SteamServerBrowserApiService
         {
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
 
-            if (game.UseDefinedServerList ?? false)
-            {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
-                return await QueryServers(game, game.Servers);
-            }
-            else if (game.MasterServer.HasValue)
-            {
-                var legacyServers = await A2SQuery.QueryServerList(
-                    A2SQuery.GetMasterServerAddress(game.MasterServer.Value), game
-                );
-                return await QueryServers(game, legacyServers.Select(s => s.Address).ToList());
-            }
+            if ((game.UseDefinedServerList ?? false) || game.MasterServer.HasValue)
+                return (game.GameServers is null) ? [] : game.GameServers;
             else
             {
                 var gamedirFilter = string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"\\gamedir\\{game.GameDir}";
@@ -70,20 +57,6 @@ public class SteamServerBrowserApiService
                 );
             }
         });
-    }
-
-    private static bool IsServerValid(Game game, ServerInfo? server)
-    {
-        if (server is null || !server.HasValue)
-            return false;
-
-        if (server.Value.MaxPlayers > 128 || server.Value.MaxPlayers <= 1)
-            return false;
-
-        if (game.MasterServer.HasValue && game.MasterServer.Value == MasterServer.GoldSrc && !server.Value.Version.EndsWith("/Stdio"))
-            return false;
-
-        return true;
     }
 
     private async Task<List<T>> Fetch<T>(string url)
@@ -104,17 +77,5 @@ public class SteamServerBrowserApiService
         {
             return [];
         }
-    }
-
-    private static async Task<List<GameServerItem>> QueryServers(Game game, List<string> servers, int timeout = 1500)
-    {
-        var items = new ConcurrentBag<GameServerItem>();
-        await Parallel.ForEachAsync(servers, async (address, _) =>
-        {
-            var obj = await A2SQuery.QueryServerInfo(address, timeout);
-            if (IsServerValid(game, obj))
-                items.Add(obj.Value.MapToGameServerItem(game));
-        });
-        return [.. items];
     }
 }
