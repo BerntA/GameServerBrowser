@@ -217,6 +217,11 @@
     "appId": 244630
   },
   {
+    "name": "EMPIRES",
+    "icon": "img/icons/empires",
+    "appId": 17740
+  },
+  {
     "name": "No More Room in Hell",
     "icon": "img/icons/nmrih",
     "appId": 224260
@@ -286,6 +291,12 @@
     "icon": "img/icons/dod",
     "gamedir": "dod",
     "appId": 30
+  },
+  {
+    "name": "Day of Defeat: Source",
+    "icon": "img/icons/dods",
+    "gamedir": "dod",
+    "appId": 300
   },
   {
     "name": "Wanted!",
