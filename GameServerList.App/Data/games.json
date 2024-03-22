@@ -94,7 +94,9 @@
   {
     "name": "Insurgency: Modern Infantry Combat",
     "icon": "img/icons/ins",
-    "appId": 17700
+    "appId": 17700,
+    "useDefinedServerList": true,
+    "noBackgroundService": true
   },
   {
     "name": "Infestus",
@@ -309,6 +311,7 @@
     "icon": "img/icons/hidden",
     "gamedir": "hidden",
     "masterServer": "Source",
+    "noBackgroundService": true,
     "appId": 215
   },
   {
@@ -340,6 +343,7 @@
     "icon": "img/icons/zmaster",
     "gamedir": "zombie_master",
     "masterServer": "Source",
+    "noBackgroundService": true,
     "appId": 215
   },
   {
@@ -407,6 +411,7 @@
     "icon": "img/icons/hl2",
     "gamedir": "SmodTroopers",
     "masterServer": "Source",
+    "noBackgroundService": true,
     "appId": 215
   },
   {
