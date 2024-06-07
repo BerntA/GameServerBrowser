@@ -1,5 +1,6 @@
 ﻿using GameServerList.Common.External;
 using GameServerList.Common.Model;
+using GameServerList.Common.Model.A2S;
 using GameServerList.Common.Utils;
 
 var appId = 0UL;
@@ -18,7 +19,7 @@ var game = new Game
     AppId = appId,
 };
 
-var servers = await A2SQuery.QueryServerList(A2SQuery.SourceMasterServer, game, timeout);
+var servers = await A2SQuery.QueryServerList(MasterServer.Source, game, timeout);
 
 Console.WriteLine($"Found {servers.Count} servers, filtering out dupes...");
 

@@ -84,8 +84,9 @@ public static class A2SQuery
         }
     }
 
-    public static async Task<List<MasterInfo>> QueryServerList(string[] masterServerAddresses, Game targetGame, int timeout = 15000)
+    public static async Task<List<MasterInfo>> QueryServerList(MasterServer masterServer, Game targetGame, int timeout = 15000)
     {
+        var masterServerAddresses = GetMasterServerAddress(masterServer);
         var queries = await Task.WhenAll(masterServerAddresses.Select(s => QueryServerList(s, targetGame, timeout)));
         var servers = queries.SelectMany(s => s).DistinctBy(s => s.Address).ToList();
         return servers;

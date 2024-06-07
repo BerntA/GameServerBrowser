@@ -64,16 +64,14 @@ public class SteamServerBrowserApiService
         });
     }
 
-    public static async Task<List<GameServerItem>> Query(Game game)
+    public static async Task<List<GameServerItem>> Query(Game game, int timeoutServers = 1500, int timeoutMasterServer = 15000)
     {
         if (game.UseDefinedServerList ?? false)
-            return await QueryServers(game, game.Servers);
+            return await QueryServers(game, game.Servers, timeoutServers);
         else if (game.MasterServer.HasValue)
         {
-            var legacyServers = await A2SQuery.QueryServerList(
-                A2SQuery.GetMasterServerAddress(game.MasterServer.Value), game
-            );
-            return await QueryServers(game, legacyServers.Select(s => s.Address).ToList());
+            var legacyServers = await A2SQuery.QueryServerList(game.MasterServer.Value, game, timeoutMasterServer);
+            return await QueryServers(game, legacyServers.Select(s => s.Address).ToList(), timeoutServers);
         }
         return [];
     }

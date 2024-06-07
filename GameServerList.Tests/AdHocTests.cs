@@ -1,5 +1,6 @@
 using GameServerList.Common.External;
 using GameServerList.Common.Model;
+using GameServerList.Common.Model.A2S;
 using GameServerList.Common.Utils;
 using System.Collections.Concurrent;
 
@@ -53,7 +54,7 @@ public class AdHocTests
     public async Task MasterServerListTest()
     {
         var servers = await A2SQuery.QueryServerList(
-            A2SQuery.SourceMasterServer,
+            MasterServer.Source,
             new Game { AppId = 215, GameDir = "hidden" },
             timeout
         );
@@ -68,7 +69,7 @@ public class AdHocTests
     public async Task MasterServerHLTest()
     {
         var servers = await A2SQuery.QueryServerList(
-            A2SQuery.SourceMasterServer,
+            MasterServer.GoldSrc,
             new Game { AppId = 70, GameDir = "valve" },
             timeout
         );
