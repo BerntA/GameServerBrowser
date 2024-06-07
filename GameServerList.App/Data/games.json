@@ -165,7 +165,9 @@
   {
     "name": "Dark Messiah of Might & Magic",
     "icon": "img/icons/messiah",
-    "appId": 2130
+    "appId": 2130,
+    "masterServer": "DarkMessiah",
+    "noBackgroundService": true
   },
   {
     "name": "Double Action: Boogaloo",
