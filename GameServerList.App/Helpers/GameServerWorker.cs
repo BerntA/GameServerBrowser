@@ -28,7 +28,7 @@ public class GameServerWorker : BackgroundService
             {
                 try
                 {
-                    game.GameServers = await SteamServerBrowserApiService.Query(game);
+                    game.GameServers = await SteamServerBrowserApiService.Query(game, 650);
                 }
                 catch
                 {
@@ -36,7 +36,7 @@ public class GameServerWorker : BackgroundService
                 }
             }
 
-            nextUpdateAt = DateTime.UtcNow.AddMinutes(15);
+            nextUpdateAt = DateTime.UtcNow.AddMinutes(30);
         }
     }
 }
