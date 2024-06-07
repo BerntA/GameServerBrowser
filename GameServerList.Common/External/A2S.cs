@@ -12,15 +12,17 @@ public static class A2SQuery
     private static readonly byte[] ServerRequest = { 0xFF, 0xFF, 0xFF, 0xFF, 0x54, 0x53, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x20, 0x45, 0x6E, 0x67, 0x69, 0x6E, 0x65, 0x20, 0x51, 0x75, 0x65, 0x72, 0x79, 0x00 };
     private static readonly byte[] PlayerRequest = { 0xFF, 0xFF, 0xFF, 0xFF, 0x55, 0xFF, 0xFF, 0xFF, 0xFF };
 
-    public const string SourceMasterServer = "208.64.200.65:27015";
-    public const string GoldSrcMasterServer = "208.78.164.209:27011";
+    public static readonly string[] SourceMasterServer = ["208.64.200.65:27015"];
+    public static readonly string[] GoldSrcMasterServer = ["208.78.164.209:27011"];
+    public static readonly string[] DarkMessiahMasterServer = ["195.154.173.68:27010", "135.125.202.170:27010"];
 
-    public static string GetMasterServerAddress(MasterServer masterServer)
+    public static string[] GetMasterServerAddress(MasterServer masterServer)
     {
         return masterServer switch
         {
             MasterServer.Source => SourceMasterServer,
             MasterServer.GoldSrc => GoldSrcMasterServer,
+            MasterServer.DarkMessiah => DarkMessiahMasterServer,
             _ => throw new ArgumentException("Invalid master server!"),
         };
     }
@@ -80,6 +82,13 @@ public static class A2SQuery
         {
             udpClient.Close();
         }
+    }
+
+    public static async Task<List<MasterInfo>> QueryServerList(string[] masterServerAddresses, Game targetGame, int timeout = 15000)
+    {
+        var queries = await Task.WhenAll(masterServerAddresses.Select(s => QueryServerList(s, targetGame, timeout)));
+        var servers = queries.SelectMany(s => s).DistinctBy(s => s.Address).ToList();
+        return servers;
     }
 
     public static async Task<List<MasterInfo>> QueryServerList(string masterServerAddress, Game targetGame, int timeout = 15000)

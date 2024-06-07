@@ -4,4 +4,5 @@ public enum MasterServer
 {
     GoldSrc,
     Source,
+    DarkMessiah,
 }
