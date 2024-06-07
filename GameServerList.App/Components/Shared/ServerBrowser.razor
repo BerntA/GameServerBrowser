@@ -44,7 +44,7 @@
             <MudTd DataLabel="Map">@context.Map</MudTd>
             <MudTd HideSmall="true" Style="text-align:right">
                 <MudIconButton Icon="@Icons.Material.Filled.ArrowOutward" Variant="Variant.Text" Color="Color.Info" Size="Size.Small" Title="Connect" Href="@($"steam://connect/{context.Address}")" />
-                <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowDown" Variant="Variant.Text" Color="Color.Info" Size="Size.Small" Title="Show/Hide server details" OnClick="async () => { await ToggleServerDetails(context); }" />
+                <MudIconButton Icon="@(context.ShouldShowDetails ? Icons.Material.Filled.KeyboardArrowUp : Icons.Material.Filled.KeyboardArrowDown)" Variant="Variant.Text" Color="Color.Info" Size="Size.Small" Title="Show/Hide server details" OnClick="async () => { await ToggleServerDetails(context); }" />
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
