@@ -35,7 +35,7 @@ public class SteamPlayerDetailApiService
             }
 
             if (details is null || details.Count == 0)
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(1);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(5);
 
             return details
                 .OrderByDescending(p => p.Score)
