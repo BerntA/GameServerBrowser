@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -9,6 +9,11 @@
         <article>
             @Body
         </article>
+        <footer>
+            <MudContainer Class="mt-3" MaxWidth="MaxWidth.ExtraExtraLarge">
+                <MudSwitch @bind-Value="@_isDarkMode" @bind-Value:after="UpdateLocalStorage" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Dark Mode" />
+            </MudContainer>
+        </footer>
     </main>
 </div>
 
@@ -20,3 +25,21 @@
 
 <div id="components-reconnect-modal" style="display: none;">
 </div>
+
+@code {
+    private bool _isDarkMode;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender is false)
+            return;
+
+        _isDarkMode = await _localStorage.GetItemAsync<bool>("dark-mode");
+        StateHasChanged();
+    }
+
+    protected async Task UpdateLocalStorage()
+    {
+        await _localStorage.SetItemAsync("dark-mode", _isDarkMode);
+    }
+}
