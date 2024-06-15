@@ -13,10 +13,10 @@
         <ToolBarContent>       
             <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
                 <MudText Typo="Typo.subtitle1" Class="mr-4"><strong>@(_serversFound)</strong> servers found</MudText>
-                <MudCheckBox @bind-Checked="@_hideFullServers">Server not full</MudCheckBox>
-                <MudCheckBox @bind-Checked="@_hideEmptyServers">Has users playing</MudCheckBox>
+                <MudCheckBox T="bool" @bind-Value="@_hideFullServers" @bind-Value:after="UpdateLocalStorage">Server not full</MudCheckBox>
+                <MudCheckBox T="bool" @bind-Value="@_hideEmptyServers" @bind-Value:after="UpdateLocalStorage">Has users playing</MudCheckBox>
                 <MudSpacer />
-                <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                <MudTextField @bind-Value="_searchString" @bind-Value:after="UpdateLocalStorage" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(); }">
                 @if(_loading)
                 {
@@ -29,7 +29,7 @@
                 </MudButton>
             </MudHidden>
             <MudHidden Breakpoint="Breakpoint.MdAndUp">
-                <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small" Class="mt-0"></MudTextField>
+                <MudTextField @bind-Value="_searchString" @bind-Value:after="UpdateLocalStorage" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small" Class="mt-0"></MudTextField>
             </MudHidden>
         </ToolBarContent>
         <HeaderContent>
@@ -111,9 +111,25 @@
         if (firstRender is false)
             return;
 
-        _activeGame = await _localStorage.GetItemAsync<int>("selected-game");
+        await LoadLocalStorage();
         await SelectedGame();
         StateHasChanged();
+    }
+
+    protected async Task LoadLocalStorage()
+    {
+        _activeGame = await _localStorage.GetItemAsync<int>("selected-game");
+        _hideEmptyServers = await _localStorage.GetItemAsync<bool>("game-filter-noempty");
+        _hideFullServers = await _localStorage.GetItemAsync<bool>("game-filter-nofull");
+        _searchString = await _localStorage.GetItemAsync<string>("game-filter-map");
+    }
+
+    protected async Task UpdateLocalStorage()
+    {
+        await _localStorage.SetItemAsync("selected-game", _activeGame);
+        await _localStorage.SetItemAsync("game-filter-noempty", _hideEmptyServers);
+        await _localStorage.SetItemAsync("game-filter-nofull", _hideFullServers);
+        await _localStorage.SetItemAsync("game-filter-map", _searchString);
     }
 
     protected async Task SelectedGame()
@@ -121,7 +137,7 @@
         _loading = true;
         _servers = await _serverBrowserService.FetchServers(GameList.GetGameByIndex(_activeGame));
         _loading = false;
-        await _localStorage.SetItemAsync("selected-game", _activeGame);
+        await UpdateLocalStorage();
     }
 
     protected async Task ToggleServerDetails(GameServerItem element)
