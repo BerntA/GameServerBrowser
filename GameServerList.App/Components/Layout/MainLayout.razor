@@ -10,8 +10,15 @@
             @Body
         </article>
         <footer>
-            <MudContainer Class="mt-3" MaxWidth="MaxWidth.ExtraExtraLarge">
-                <MudSwitch @bind-Value="@_isDarkMode" @bind-Value:after="UpdateLocalStorage" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Dark Mode" />
+            <MudContainer Class="mt-5" Fixed="true">
+                <MudGrid>
+                    <MudItem xs="11" Class="pl-5">
+                        <MudSwitch @bind-Value="@_isDarkMode" @bind-Value:after="UpdateLocalStorage" Color="Color.Primary" T="bool" Label="Toggle Dark Mode" />
+                    </MudItem>
+                    <MudItem xs="1" Class="pr-5" Style="text-align:right">                        
+                        <MudLink Href="https://github.com/BerntA/GameServerBrowser" Target="_blank"><MudIcon Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" /></MudLink>
+                    </MudItem>
+                </MudGrid>                                
             </MudContainer>
         </footer>
     </main>
