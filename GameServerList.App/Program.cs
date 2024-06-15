@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using GameServerList.Common.Services;
 using GameServerList.Components;
 using GameServerList.Helpers;
@@ -21,6 +22,7 @@ services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 services.AddMudServices();
+services.AddBlazoredLocalStorage();
 
 GameList.LoadGameList();
 
