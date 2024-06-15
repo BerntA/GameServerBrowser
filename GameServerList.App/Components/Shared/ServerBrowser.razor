@@ -1,5 +1,5 @@
 ﻿<MudContainer Class="mt-3" MaxWidth="MaxWidth.ExtraExtraLarge">
-    <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" ValueChanged=@SelectedGame>
+    <MudSelect Label="Select a game" T="int" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="@_activeGame" @bind-Value:after="SelectedGame">
     @foreach (var item in GameList.Games.Select((g, i) => new { game = g, index = i }))
     {
         <MudSelectItem Value="@(item.index)">
@@ -17,7 +17,7 @@
                 <MudCheckBox @bind-Checked="@_hideEmptyServers">Has users playing</MudCheckBox>
                 <MudSpacer />
                 <MudTextField @bind-Value="_searchString" Placeholder="Map" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-                <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(_activeGame); }">
+                <MudButton Variant="Variant.Text" Color="Color.Info" Size="Size.Small" title="Refresh" OnClick="async () => { await SelectedGame(); }">
                 @if(_loading)
                 {
                     <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
@@ -106,21 +106,26 @@
     private int _activeGame;
     private List<GameServerItem> _servers;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await SelectedGame(0);
+        if (firstRender is false)
+            return;
+
+        _activeGame = await _localStorage.GetItemAsync<int>("selected-game");
+        await SelectedGame();
+        StateHasChanged();
     }
 
-    protected async Task SelectedGame(int value)
+    protected async Task SelectedGame()
     {
-        _activeGame = value;
         _loading = true;
-        _servers = await _serverBrowserService.FetchServers(GameList.GetGameByIndex(value));
+        _servers = await _serverBrowserService.FetchServers(GameList.GetGameByIndex(_activeGame));
         _loading = false;
+        await _localStorage.SetItemAsync("selected-game", _activeGame);
     }
 
     protected async Task ToggleServerDetails(GameServerItem element)
-    {        
+    {
         element.ActivePlayers = await _serverPlayerInfoService.FetchPlayerDetails(element);
         element.ShouldShowDetails = !element.ShouldShowDetails;
     }
