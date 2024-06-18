@@ -20,7 +20,7 @@ public class GameServerWorker : BackgroundService
         {
             if (DateTime.UtcNow <= nextUpdateAt)
             {
-                Thread.Sleep(100); // put the thread on hold while waiting
+                Thread.Sleep(1000); // put the thread on hold while waiting
                 continue;
             }
 
