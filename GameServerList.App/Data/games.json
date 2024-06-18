@@ -6,6 +6,11 @@
     "appId": 70
   },
   {
+    "name": "Half-Life 2: Deathmatch",
+    "icon": "img/icons/hl2",
+    "appId": 320
+  },
+  {
     "name": "Master Sword: Rebirth",
     "icon": "img/icons/msr",
     "appId": 1961680
@@ -214,6 +219,26 @@
     "name": "Modular Combat",
     "icon": "img/icons/modcombat",
     "appId": 349480
+  },
+  {
+    "name": "D.I.P.R.I.P. Warm Up",
+    "icon": "img/icons/diprip",
+    "appId": 17530
+  },
+  {
+    "name": "IOSoccer",
+    "icon": "img/icons/soccer",
+    "appId": 673560
+  },
+  {
+    "name": "Dino D-Day",
+    "icon": "img/icons/dino",
+    "appId": 70000
+  },
+  {
+    "name": "E.Y.E: Divine Cybermancy",
+    "icon": "img/icons/eye",
+    "appId": 91700
   },
   {
     "name": "NEOTOKYO",
