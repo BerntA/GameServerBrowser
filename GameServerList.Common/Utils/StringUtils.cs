@@ -4,6 +4,17 @@ namespace GameServerList.Common.Utils;
 
 public static class StringUtils
 {
+    public static string Truncate(this string value, int maxLength, string truncationSuffix = "…")
+    {
+        if (string.IsNullOrEmpty(value))
+            return string.Empty;
+
+        if (value.Length > maxLength)
+            return $"{value[..maxLength]}{truncationSuffix}";
+
+        return value;
+    }
+
     public static string ReadNullTerminatedString(BinaryReader input)
     {
         var sb = new StringBuilder();
