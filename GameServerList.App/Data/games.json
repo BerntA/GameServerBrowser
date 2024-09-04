@@ -100,7 +100,7 @@
     "name": "Insurgency: Modern Infantry Combat",
     "icon": "img/icons/ins",
     "appId": 17700,
-    "useDefinedServerList": true,
+    "masterServer": "Source",
     "noBackgroundService": true
   },
   {
