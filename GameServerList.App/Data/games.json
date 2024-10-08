@@ -51,6 +51,12 @@
     "appId": 70
   },
   {
+    "name": "Halo: GoldSrc",
+    "icon": "img/icons/halogs",
+    "gamedir": "halogs",
+    "appId": 70
+  },
+  {
     "name": "Firearms",
     "icon": "img/icons/hl",
     "gamedir": "firearms",
@@ -72,6 +78,36 @@
     "name": "Zombie Panic!",
     "icon": "img/icons/hl",
     "gamedir": "zp",
+    "appId": 70
+  },
+  {
+    "name": "Gunman Chronicles",
+    "icon": "img/icons/gunman",
+    "gamedir": "rewolf",
+    "appId": 70
+  },
+  {
+    "name": "Earth's Special Forces",
+    "icon": "img/icons/esf",
+    "gamedir": "esf",
+    "appId": 70
+  },
+  {
+    "name": "Natural Selection",
+    "icon": "img/icons/ns",
+    "gamedir": "ns",
+    "appId": 70
+  },
+  {
+    "name": "Wizard Wars",
+    "icon": "img/icons/wizardwars",
+    "gamedir": "wizardwars",
+    "appId": 70
+  },
+  {
+    "name": "Scientist Hunt",
+    "icon": "img/icons/hl",
+    "gamedir": "scihunt",
     "appId": 70
   },
   {
@@ -337,6 +373,14 @@
     "name": "Hidden: Source",
     "icon": "img/icons/hidden",
     "gamedir": "hidden",
+    "masterServer": "Source",
+    "noBackgroundService": true,
+    "appId": 215
+  },
+  {
+    "name": "Garry's Mod v9",
+    "icon": "img/icons/gmod",
+    "gamedir": "gmod9",
     "masterServer": "Source",
     "noBackgroundService": true,
     "appId": 215
