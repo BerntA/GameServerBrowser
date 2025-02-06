@@ -10,6 +10,7 @@ public class GameServerWorker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        await Task.Delay(5000);
         var nextUpdateAt = DateTime.MinValue;
         var games = GameList
             .Games
@@ -20,7 +21,7 @@ public class GameServerWorker : BackgroundService
         {
             if (DateTime.UtcNow <= nextUpdateAt)
             {
-                Thread.Sleep(1000); // put the thread on hold while waiting
+                await Task.Delay(1000); // put the thread on hold while waiting
                 continue;
             }
 
