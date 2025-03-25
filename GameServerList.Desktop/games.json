@@ -1,0 +1,604 @@
+[
+  {
+    "name": "Half-Life",
+    "icon": "img/icons/hl",
+    "gamedir": "valve",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Half-Life 2: Deathmatch",
+    "icon": "img/icons/hl2",
+    "appId": 320,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Master Sword: Rebirth",
+    "icon": "img/icons/msr",
+    "appId": 1961680,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Master Sword: Continued",
+    "icon": "img/icons/msr",
+    "gamedir": "msc",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Cry of Fear",
+    "icon": "img/icons/cof",
+    "appId": 223710,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Cry of Fear (MOD)",
+    "icon": "img/icons/cof",
+    "gamedir": "cof",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Resident Evil: Cold Blood",
+    "icon": "img/icons/recb",
+    "gamedir": "recb",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "BrainBread",
+    "icon": "img/icons/bb",
+    "gamedir": "brainbread",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Battle Grounds",
+    "icon": "img/icons/hl",
+    "gamedir": "bg",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Halo: GoldSrc",
+    "icon": "img/icons/halogs",
+    "gamedir": "halogs",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Firearms",
+    "icon": "img/icons/hl",
+    "gamedir": "firearms",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "The Specialists",
+    "icon": "img/icons/hl",
+    "gamedir": "ts",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Vampire Slayer",
+    "icon": "img/icons/hl",
+    "gamedir": "vs",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Zombie Panic!",
+    "icon": "img/icons/hl",
+    "gamedir": "zp",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Gunman Chronicles",
+    "icon": "img/icons/gunman",
+    "gamedir": "rewolf",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Earth's Special Forces",
+    "icon": "img/icons/esf",
+    "gamedir": "esf",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Natural Selection",
+    "icon": "img/icons/ns",
+    "gamedir": "ns",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Wizard Wars",
+    "icon": "img/icons/wizardwars",
+    "gamedir": "wizardwars",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Scientist Hunt",
+    "icon": "img/icons/hl",
+    "gamedir": "scihunt",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Sven Co-Op",
+    "icon": "img/icons/sven",
+    "appId": 225840,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Sven Co-Op (CLASSIC)",
+    "icon": "img/icons/sven",
+    "gamedir": "svencoop",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Treason",
+    "icon": "img/icons/treason",
+    "appId": 1786950,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Synergy",
+    "icon": "img/icons/synergy",
+    "gamedir": "synergy",
+    "appId": 17520,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Insurgency: Modern Infantry Combat",
+    "icon": "img/icons/ins",
+    "appId": 17700,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Infestus",
+    "icon": "img/icons/infestus",
+    "appId": 656800,
+    "masterServer": "Source"
+  },
+  {
+    "name": "BrainBread 2",
+    "icon": "img/icons/bb2",
+    "appId": 346330,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Battle Grounds III",
+    "icon": "img/icons/bg3",
+    "appId": 1057700,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Age of Chivalry",
+    "icon": "img/icons/aoc",
+    "appId": 17510,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Action Half-Life: Source",
+    "icon": "img/icons/actionhls",
+    "appId": 977050,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Black Mesa",
+    "icon": "img/icons/bms",
+    "appId": 362890,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Garry's Mod",
+    "icon": "img/icons/gmod",
+    "gamedir": "garrysmod",
+    "appId": 4000,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Golden Eye: Source",
+    "icon": "img/icons/ges",
+    "gamedir": "gesource",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Firearms: Source",
+    "icon": "img/icons/fas",
+    "gamedir": "fas",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Zombie Master: Reborn",
+    "icon": "img/icons/zmr",
+    "gamedir": "zombie_master_reborn",
+    "appId": 243750,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Codename CURE",
+    "icon": "img/icons/cure",
+    "appId": 355180,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Contagion",
+    "icon": "img/icons/contagion",
+    "appId": 238430,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Dark Messiah of Might & Magic",
+    "icon": "img/icons/messiah",
+    "appId": 2130,
+    "masterServer": "DarkMessiah"
+  },
+  {
+    "name": "Double Action: Boogaloo",
+    "icon": "img/icons/dab",
+    "appId": 317360,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Dystopia",
+    "icon": "img/icons/dys",
+    "appId": 17580,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Eternal Silence",
+    "icon": "img/icons/es",
+    "gamedir": "Eternal-Silence",
+    "appId": 215,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Fistful of Frags",
+    "icon": "img/icons/fof",
+    "appId": 265630,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Fortress Forever",
+    "icon": "img/icons/ff",
+    "appId": 253530,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Jabroni Brawl: Episode 3",
+    "icon": "img/icons/jb3",
+    "appId": 869480,
+    "masterServer": "Source"
+  },
+  {
+    "name": "JBMod",
+    "icon": "img/icons/jbmod",
+    "appId": 2158860,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Military Conflict: Vietnam",
+    "icon": "img/icons/mcv",
+    "appId": 1012110,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Modular Combat",
+    "icon": "img/icons/modcombat",
+    "appId": 349480,
+    "masterServer": "Source"
+  },
+  {
+    "name": "D.I.P.R.I.P. Warm Up",
+    "icon": "img/icons/diprip",
+    "appId": 17530,
+    "masterServer": "Source"
+  },
+  {
+    "name": "IOSoccer",
+    "icon": "img/icons/soccer",
+    "appId": 673560,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Dino D-Day",
+    "icon": "img/icons/dino",
+    "appId": 70000,
+    "masterServer": "Source"
+  },
+  {
+    "name": "E.Y.E: Divine Cybermancy",
+    "icon": "img/icons/eye",
+    "appId": 91700,
+    "masterServer": "Source"
+  },
+  {
+    "name": "NEOTOKYO",
+    "icon": "img/icons/neotokyo",
+    "appId": 244630,
+    "masterServer": "Source"
+  },
+  {
+    "name": "EMPIRES",
+    "icon": "img/icons/empires",
+    "appId": 17740,
+    "masterServer": "Source"
+  },
+  {
+    "name": "No More Room in Hell",
+    "icon": "img/icons/nmrih",
+    "appId": 224260,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Nuclear Dawn",
+    "icon": "img/icons/nucleardawn",
+    "appId": 17710,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Obsidian Conflict",
+    "icon": "img/icons/oc",
+    "appId": 17750,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Pirates, Vikings, and Knights II",
+    "icon": "img/icons/pvkii",
+    "appId": 17570,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Smashball",
+    "icon": "img/icons/smashball",
+    "appId": 17730,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Zombie Panic! Source",
+    "icon": "img/icons/zps",
+    "appId": 17500,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Obsidian Conflict (MOD)",
+    "icon": "img/icons/oc",
+    "gamedir": "obsidian",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Base Defense",
+    "icon": "img/icons/bd",
+    "appId": 632730,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Deathmatch Classic",
+    "icon": "img/icons/dmclassic",
+    "gamedir": "dmc",
+    "appId": 40,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Half-Life: Opposing Force",
+    "icon": "img/icons/opfor",
+    "gamedir": "gearbox",
+    "appId": 50,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Ricochet",
+    "icon": "img/icons/ricochet",
+    "gamedir": "ricochet",
+    "appId": 60,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Team Fortress Classic",
+    "icon": "img/icons/tfc",
+    "gamedir": "tfc",
+    "appId": 20,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Day of Defeat",
+    "icon": "img/icons/dod",
+    "gamedir": "dod",
+    "appId": 30,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Day of Defeat: Source",
+    "icon": "img/icons/dods",
+    "gamedir": "dod",
+    "appId": 300,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Wanted!",
+    "icon": "img/icons/wanted",
+    "gamedir": "wantedsp",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Hidden: Source",
+    "icon": "img/icons/hidden",
+    "gamedir": "hidden",
+    "appId": 215,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Garry's Mod v9",
+    "icon": "img/icons/gmod",
+    "gamedir": "gmod9",
+    "appId": 215,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Public Enemy",
+    "icon": "img/icons/penemy",
+    "gamedir": "penemy",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Underworld: Bloodline",
+    "icon": "img/icons/underworld",
+    "gamedir": "underworld",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Hostile Intent",
+    "icon": "img/icons/hostileintent",
+    "gamedir": "hostileintent",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Zombie Master (CLASSIC)",
+    "icon": "img/icons/zmaster",
+    "gamedir": "zombie_master",
+    "appId": 215,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Situation Outbreak 2",
+    "icon": "img/icons/so",
+    "gamedir": "so2",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Situation Outbreak",
+    "icon": "img/icons/so",
+    "gamedir": "so",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Resistance and Liberation",
+    "icon": "img/icons/rnl",
+    "gamedir": "RnLBeta",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Open Fortress",
+    "icon": "img/icons/tf2",
+    "gamedir": "open_fortress",
+    "appId": 243750,
+    "masterServer": "Source"
+  },
+  {
+    "name": "TF2 Classic",
+    "icon": "img/icons/tf2",
+    "gamedir": "tf2classic",
+    "appId": 243750,
+    "masterServer": "Source"
+  },
+  {
+    "name": "OccupationCS",
+    "icon": "img/icons/occupationcs",
+    "gamedir": "OccupationCS",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Pirates, Vikings and Knights",
+    "icon": "img/icons/pvk",
+    "gamedir": "pvk",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Kingdoms Collide",
+    "icon": "img/icons/kc",
+    "gamedir": "KingdomsCollide",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Jailbreak",
+    "icon": "img/icons/jailbreak",
+    "gamedir": "jailbreak",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "BuzzyBots",
+    "icon": "img/icons/buzzybots",
+    "gamedir": "buzzybots",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "SMOD Troopers",
+    "icon": "img/icons/hl2",
+    "gamedir": "SmodTroopers",
+    "appId": 215,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Action Half-Life",
+    "icon": "img/icons/hl",
+    "gamedir": "action",
+    "appId": 70,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Orion: Source",
+    "icon": "img/icons/hl2",
+    "gamedir": "orion",
+    "appId": 218,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Insurgency",
+    "icon": "img/icons/ins2",
+    "appId": 222880,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Day of Infamy",
+    "icon": "img/icons/doi",
+    "appId": 447820,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Counter-Strike",
+    "icon": "img/icons/cstrike",
+    "appId": 10,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Counter-Strike: Condition Zero",
+    "icon": "img/icons/czero",
+    "appId": 80,
+    "masterServer": "GoldSrc"
+  },
+  {
+    "name": "Counter-Strike: Source",
+    "icon": "img/icons/css",
+    "appId": 240,
+    "masterServer": "Source"
+  },
+  {
+    "name": "Counter-Strike 2",
+    "icon": "img/icons/cs2",
+    "appId": 730,
+    "masterServer": "Source"
+  }
+]
