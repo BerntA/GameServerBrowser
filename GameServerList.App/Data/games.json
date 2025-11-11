@@ -76,9 +76,9 @@
   },
   {
     "name": "Zombie Panic!",
-    "icon": "img/icons/hl",
+    "icon": "img/icons/zp",
     "gamedir": "zp",
-    "appId": 70
+    "appId": 3825360
   },
   {
     "name": "Gunman Chronicles",
@@ -517,8 +517,7 @@
   {
     "name": "Counter-Strike: Condition Zero",
     "icon": "img/icons/czero",
-    "appId": 80,
-    "masterServer": "GoldSrc"
+    "appId": 80
   },
   {
     "name": "Counter-Strike: Source",
