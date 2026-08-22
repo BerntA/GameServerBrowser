@@ -137,7 +137,7 @@
     "icon": "img/icons/ins",
     "appId": 17700,
     "masterServer": "Source",
-    "noBackgroundService": true
+    "useDefinedServerList": true
   },
   {
     "name": "Infestus",
@@ -207,8 +207,7 @@
     "name": "Dark Messiah of Might & Magic",
     "icon": "img/icons/messiah",
     "appId": 2130,
-    "masterServer": "DarkMessiah",
-    "noBackgroundService": true
+    "masterServer": "DarkMessiah"
   },
   {
     "name": "Double Action: Boogaloo",
@@ -374,7 +373,6 @@
     "icon": "img/icons/hidden",
     "gamedir": "hidden",
     "masterServer": "Source",
-    "noBackgroundService": true,
     "appId": 215
   },
   {
@@ -382,7 +380,6 @@
     "icon": "img/icons/gmod",
     "gamedir": "gmod9",
     "masterServer": "Source",
-    "noBackgroundService": true,
     "appId": 215
   },
   {
@@ -408,7 +405,6 @@
     "icon": "img/icons/zmaster",
     "gamedir": "zombie_master",
     "masterServer": "Source",
-    "noBackgroundService": true,
     "appId": 215
   },
   {
@@ -476,7 +472,6 @@
     "icon": "img/icons/hl2",
     "gamedir": "SmodTroopers",
     "masterServer": "Source",
-    "noBackgroundService": true,
     "appId": 215
   },
   {
@@ -518,6 +513,11 @@
     "icon": "img/icons/css",
     "appId": 240,
     "useDefinedServerList": true
+  },
+  {
+    "name": "Counter-Strike: Global Offensive",
+    "icon": "img/icons/csgo",
+    "appId": 4465480
   },
   {
     "name": "Counter-Strike 2",
