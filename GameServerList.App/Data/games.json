@@ -207,7 +207,8 @@
     "name": "Dark Messiah of Might & Magic",
     "icon": "img/icons/messiah",
     "appId": 2130,
-    "masterServer": "DarkMessiah"
+    "masterServer": "DarkMessiah",
+    "useDefinedServerList": true
   },
   {
     "name": "Double Action: Boogaloo",
@@ -432,10 +433,9 @@
     "appId": 243750
   },
   {
-    "name": "TF2 Classic",
+    "name": "Team Fortress 2 Classified",
     "icon": "img/icons/tf2",
-    "gamedir": "tf2classic",
-    "appId": 243750
+    "appId": 3545060
   },
   {
     "name": "OccupationCS",
