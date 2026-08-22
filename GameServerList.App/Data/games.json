@@ -386,12 +386,6 @@
     "appId": 215
   },
   {
-    "name": "Battle Grounds II",
-    "icon": "img/icons/bg2",
-    "gamedir": "bg2",
-    "appId": 218
-  },
-  {
     "name": "Public Enemy",
     "icon": "img/icons/penemy",
     "gamedir": "penemy",
