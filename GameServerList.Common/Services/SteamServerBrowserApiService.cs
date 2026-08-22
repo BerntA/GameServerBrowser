@@ -48,10 +48,8 @@ public class SteamServerBrowserApiService
         {
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
 
-            if (game.NoBackgroundService ?? false)
+            if ((game.UseDefinedServerList ?? false) || game.MasterServer.HasValue)
                 return await Query(game);
-            else if (game.UsesBackgroundService())
-                return (game.GameServers is null) ? [] : game.GameServers;
             else
             {
                 var gamedirFilter = string.IsNullOrEmpty(game.GameDir) ? string.Empty : $"\\gamedir\\{game.GameDir}";

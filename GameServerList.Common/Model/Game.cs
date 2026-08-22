@@ -11,7 +11,6 @@ public class Game
     public ulong? AppId { get; set; }
     public MasterServer? MasterServer { get; set; }
     public bool? UseDefinedServerList { get; set; }
-    public bool? NoBackgroundService { get; set; }
     public string? Filters { get; set; }
 
     [JsonIgnore]
@@ -19,15 +18,4 @@ public class Game
 
     [JsonIgnore]
     public List<GameServerItem>? GameServers { get; set; }
-
-    public bool UsesBackgroundService()
-    {
-        if (NoBackgroundService ?? false)
-            return false;
-
-        if ((UseDefinedServerList ?? false) || MasterServer.HasValue)
-            return true;
-
-        return false;
-    }
 }
