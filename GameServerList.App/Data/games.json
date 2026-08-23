@@ -136,7 +136,6 @@
     "name": "Insurgency: Modern Infantry Combat",
     "icon": "img/icons/ins",
     "appId": 17700,
-    "masterServer": "Source",
     "useDefinedServerList": true
   },
   {
@@ -207,7 +206,6 @@
     "name": "Dark Messiah of Might & Magic",
     "icon": "img/icons/messiah",
     "appId": 2130,
-    "masterServer": "DarkMessiah",
     "useDefinedServerList": true
   },
   {
@@ -373,14 +371,12 @@
     "name": "Hidden: Source",
     "icon": "img/icons/hidden",
     "gamedir": "hidden",
-    "masterServer": "Source",
     "appId": 215
   },
   {
     "name": "Garry's Mod v9",
     "icon": "img/icons/gmod",
     "gamedir": "gmod9",
-    "masterServer": "Source",
     "appId": 215
   },
   {
@@ -405,7 +401,6 @@
     "name": "Zombie Master (CLASSIC)",
     "icon": "img/icons/zmaster",
     "gamedir": "zombie_master",
-    "masterServer": "Source",
     "appId": 215
   },
   {
@@ -471,7 +466,6 @@
     "name": "SMOD Troopers",
     "icon": "img/icons/hl2",
     "gamedir": "SmodTroopers",
-    "masterServer": "Source",
     "appId": 215
   },
   {
@@ -505,8 +499,7 @@
     "name": "Counter-Strike",
     "icon": "img/icons/cstrike",
     "appId": 10,
-    "useDefinedServerList": true,
-    "masterServer": "GoldSrc"
+    "useDefinedServerList": true
   },
   {
     "name": "Counter-Strike: Condition Zero",
