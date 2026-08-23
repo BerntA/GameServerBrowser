@@ -497,6 +497,11 @@
     "appId": 447820
   },
   {
+    "name": "TTT Classic",
+    "icon": "img/icons/tttc",
+    "appId": 4570530
+  },
+  {
     "name": "Counter-Strike",
     "icon": "img/icons/cstrike",
     "appId": 10,
